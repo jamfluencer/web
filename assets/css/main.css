@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+@tailwind base;
+
+@layer base {
+  body {
+    @apply font-medium;
+    @apply min-h-screen;
+    background: rgb(18, 95, 118);
+    background: linear-gradient(
+        9deg,
+        rgba(18, 95, 118, 1) 0%,
+        rgba(17, 55, 66, 1) 20%,
+        rgba(17, 17, 17, 1) 60%
+      )
+      fixed;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+}
