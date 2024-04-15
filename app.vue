@@ -14,7 +14,8 @@ useHead({ title: 'Influencer Radio' });
     </header>
     <main class="flex flex-col gap-12 max-w-96 mx-auto">
       <CurrentlyPlaying />
-      <PlaylistTracks />
+      <QueueTracks />
+      <PlaylistTracks class="hidden" />
     </main>
     <footer></footer>
   </div>
