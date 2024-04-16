@@ -6,8 +6,9 @@
   body {
     @apply font-medium;
     @apply min-h-screen;
-    background: rgb(18, 95, 118);
-    background: linear-gradient(
+    @apply text-white;
+    background: black
+      linear-gradient(
         9deg,
         rgba(18, 95, 118, 1) 0%,
         rgba(17, 55, 66, 1) 20%,
