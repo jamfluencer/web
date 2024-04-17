@@ -7,14 +7,16 @@
     @apply font-medium;
     @apply min-h-screen;
     @apply text-white;
-    background: black
-      linear-gradient(
-        9deg,
-        rgba(18, 95, 118, 1) 0%,
-        rgba(17, 55, 66, 1) 20%,
-        rgba(17, 17, 17, 1) 60%
-      )
-      fixed;
+    @apply bg-primary;
+    @apply bg-blend-darken;
+    @apply bg-fixed;
+    transition: background-color 0.5s;
+    background-image: linear-gradient(
+        to top right,
+        rgba(0, 0, 0, 0.8) 10%,
+        transparent
+      ),
+      linear-gradient(to top left, rgba(0, 0, 0, 0.5) 10%, transparent);
   }
 
   h1 {
