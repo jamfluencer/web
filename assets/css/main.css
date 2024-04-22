@@ -10,6 +10,7 @@
     @apply bg-primary;
     @apply bg-blend-darken;
     @apply bg-fixed;
+    @apply overscroll-none;
     transition: background-color 0.5s;
     background-image: linear-gradient(
         to top right,

@@ -4,7 +4,6 @@ import {
   cachedQueue,
   type Queue,
 } from '@/composables/usePlaylist';
-import { FastAverageColor } from 'fast-average-color';
 
 const nowPlaying = ref();
 const isOffAir = ref(true);
@@ -20,16 +19,6 @@ socket.onmessage = function ({ data }: MessageEvent<string>) {
   } else {
     isOffAir.value = false;
     nowPlaying.value = currentlyPlaying;
-
-    const fac = new FastAverageColor();
-    fac
-      .getColorAsync(nowPlaying.value.image)
-      .then((color) => {
-        document.body.style.backgroundColor = color.rgba;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   }
 };
 
