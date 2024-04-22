@@ -23,7 +23,10 @@ socket.onmessage = function ({ data }: MessageEvent<string>) {
 
     const fac = new FastAverageColor();
     fac
-      .getColorAsync(nowPlaying.value.image)
+      .getColorAsync(nowPlaying.value.image, {
+        algorithm: 'simple',
+        mode: 'precision',
+      })
       .then((color) => {
         document.body.style.backgroundColor = color.rgba;
       })
@@ -53,6 +56,8 @@ watchEffect(() => {
   if (!currentSongInPlaylist) return;
   nowPlaying.value.addedBy = currentSongInPlaylist.addedBy;
 });
+
+const jammed = ref(false);
 </script>
 
 <template>
@@ -70,12 +75,20 @@ watchEffect(() => {
       </div>
       <div v-else class="now-playing-card flex flex-col gap-4">
         <div class="rounded-lg overflow-hidden">
-          <NuxtImg
-            :src="nowPlaying.image"
-            :alt="`${nowPlaying.album} cover art`"
-            class="w-full max-w-96 aspect-square"
-            loading="lazy"
-          />
+          <div class="w-full max-w-96 aspect-square relative">
+            <NuxtImg
+              :src="nowPlaying.image"
+              :alt="`${nowPlaying.album} cover art`"
+              class="w-full h-full"
+              loading="lazy"
+            />
+            <div
+              class="absolute top-0 left-0 w-full h-full flex items-center justify-center cursor-pointer"
+              @click="jammed = !jammed"
+            >
+              <IconJar v-if="jammed" class="text-red-800" size="96" />
+            </div>
+          </div>
         </div>
         <div class="overflow-hidden">
           <div class="text-2xl font-bold truncate" :title="nowPlaying.song">
