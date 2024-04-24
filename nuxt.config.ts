@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   css: ['@/assets/css/main.css'],
-  modules: ['@nuxtjs/tailwindcss', "@nuxt/image"],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@vueuse/nuxt'],
   runtimeConfig: {
     public: {
       playlistId: process.env.PLAYLIST_ID,
