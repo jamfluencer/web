@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: .output/public/
+    destination: /usr/share/nginx/jamfluencer/web
+  - source: appspec.yml
+    destination: appspec.yml
+permissions:
+  - object: /usr/share/nginx
+    owner: nginx
+    group: nginx
+    mode: 775
