@@ -112,6 +112,7 @@ const bgTo = ref<HTMLImageElement | null>(null);
       </div>
     </div>
   </div>
+  <!-- TODO: Make these a single SongListDrawer or sumthin -->
   <AppQueueDrawer v-model="isQueueDrawerOpen" />
   <AppRecentDrawer v-model="isRecentDrawerOpen" />
   <AppAboutDrawer v-model="isAboutDrawerOpen" />
