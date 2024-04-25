@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: .output/public/
-    destination: /usr/share/nginx/jamfluencer/web
+    destination: /usr/share/nginx/jamfluencer-web
   - source: appspec.yml
-    destination: /usr/share/nginx/jamfluencer/web/appspec.yml
+    destination: /usr/share/nginx/jamfluencer-web/appspec.yml
 permissions:
   - object: /usr/share/nginx
     owner: nginx
