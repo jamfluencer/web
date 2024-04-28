@@ -1,23 +1,4 @@
 <script setup lang="ts">
-const songs: Jamfluencer.Track[] = [
-  {
-    id: '1',
-    bg: '/images/bg.jpg',
-    album: '/images/album2.jpg',
-    title: 'Nothing New',
-    artist: 'The Strike',
-    addedBy: 'Ryan',
-  },
-  {
-    id: '2',
-    bg: '/images/bg2.jpg',
-    album: '/images/album.jpg',
-    title: 'Shy',
-    artist: 'Saint Blonde',
-    addedBy: 'Ryan',
-  },
-];
-
 const offAirBg = '/images/test_pattern.png';
 
 const isQueueDrawerOpen = ref(false);
@@ -32,12 +13,12 @@ const navigation = [
   { text: 'about', action: () => (isAboutDrawerOpen.value = true) },
 ];
 
-const bgArt = ref(songs[0].bg);
-const albumArt = ref(songs[0].album);
+const bgArt = ref(mockTracks[0].bg);
+const albumArt = ref(mockTracks[0].album);
 const currentSong = ref({
-  title: songs[0].title,
-  artist: songs[0].artist,
-  addedBy: songs[0].addedBy,
+  title: mockTracks[0].title,
+  artist: mockTracks[0].artist,
+  addedBy: mockTracks[0].addedBy,
 });
 
 const bgFrom = ref<HTMLImageElement | null>(null);
@@ -150,17 +131,17 @@ const isOffAir = ref(false);
   <CommonTrackDrawer
     v-model="isQueueDrawerOpen"
     title="Up next"
-    :songs="songs"
+    :tracks="mockTracks"
   />
   <CommonTrackDrawer
     v-model="isRecentDrawerOpen"
     title="Recently played"
-    :songs="songs"
+    :tracks="mockTracks"
   />
   <CommonTrackDrawer
     v-model="isPlaylistDrawerOpen"
     title="Playlist"
-    :songs="songs"
+    :tracks="mockTracks"
   />
   <AppAboutDrawer v-model="isAboutDrawerOpen" />
 </template>
