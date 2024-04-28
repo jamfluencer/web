@@ -3,7 +3,7 @@ const isOpen = defineModel<boolean>({ required: true });
 
 defineProps<{
   title: string;
-  songs: Jamfluencer.Track[];
+  tracks: Jamfluencer.Track[];
 }>();
 </script>
 
@@ -11,16 +11,20 @@ defineProps<{
   <CommonDrawer v-model="isOpen">
     <template #title>{{ title }}</template>
     <ol class="flex flex-col gap-4">
-      <li v-for="song in songs" :key="song.id" class="flex gap-4 items-center">
+      <li
+        v-for="track in tracks"
+        :key="track.id"
+        class="flex gap-4 items-center"
+      >
         <img
           class="w-16 h-16 rounded"
-          :src="song.album"
-          :alt="`${song.album} cover`"
+          :src="track.album"
+          :alt="`${track.album} cover`"
         />
         <div class="flex flex-col gap">
-          <UserTag :user="song.addedBy" class="mb-1" small />
-          <div class="font-bold text-sm">{{ song.title }}</div>
-          <div class="text-xs">{{ song.artist }}</div>
+          <UserTag :user="track.addedBy" class="mb-1" small />
+          <div class="font-bold text-sm">{{ track.title }}</div>
+          <div class="text-xs">{{ track.artist }}</div>
         </div>
       </li>
     </ol>
