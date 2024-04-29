@@ -16,4 +16,10 @@ declare global {
       tracks: Track[];
     }
   }
+
+  namespace JamfluencerApi {
+    interface GetGoogleAuthResponse {
+      url: string;
+    }
+  }
 }

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { googleAuthUrl } = useJamfluencerApi();
+</script>
+
 <template>
   <div class="flex h-screen w-full items-center justify-center">
     <div
@@ -5,9 +9,10 @@
     >
       <button
         class="bg-red-500 hover:bg-red-400 text-white rounded px-4 py-2 transition-colors block w-full"
-        @click="navigateTo('/admin')"
+        :disabled="googleAuthUrl.isPending.value"
+        @click="googleAuthUrl.get"
       >
-        Sign in with Google
+        {{ googleAuthUrl.isPending.value ? '...' : 'Log in with Google' }}
       </button>
       <div class="flex items-end justify-center mt-4">
         <button @click="navigateTo('/')" class="hover:underline">
