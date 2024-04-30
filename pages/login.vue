@@ -1,5 +1,18 @@
 <script setup lang="ts">
+definePageMeta({
+  title: 'Login',
+  middleware: () => {
+    if (isAuthenticated()) return navigateTo('/admin', { replace: true });
+  },
+});
+
 const { googleAuthUrl } = useJamfluencerApi();
+
+watchEffect(() => {
+  if (googleAuthUrl.data.value) {
+    window.location.href = googleAuthUrl.data.value.url;
+  }
+});
 </script>
 
 <template>

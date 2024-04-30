@@ -1,3 +1,3 @@
 export default defineAppConfig({
-  title: 'Influencer Radio',
+  title: 'jamfluencer.app',
 });

@@ -8,6 +8,9 @@ export const useJamfluencerApi = () => {
     status: getGoogleAuthUrlStatus,
     execute: getGoogleAuthUrl,
   } = useFetch<JamfluencerApi.GetGoogleAuthResponse>(getUrl('auth/google'), {
+    query: {
+      redirect: window.location.origin + '/auth/google/callback',
+    },
     immediate: false,
   });
 

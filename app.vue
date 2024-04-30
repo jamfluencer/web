@@ -1,5 +1,12 @@
 <script setup lang="ts">
-useHead({ title: 'jamfluencer.app' });
+const route = useRoute();
+const appConfig = useAppConfig();
+
+useHead({
+  title: computed(() =>
+    [route.meta.title, appConfig.title].filter(Boolean).join(' - ')
+  ),
+});
 </script>
 
 <template>

@@ -9,3 +9,8 @@ export const userMap: Record<string, string> = {
 } as const;
 
 export const getUser = (id: string): string => userMap[id] ?? id;
+
+export const isAuthenticated = () => {
+  const token = useCookie<string>('token');
+  return typeof token.value === 'string' && token.value.length > 0;
+};

@@ -1,4 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  title: 'Admin',
+  middleware: 'auth',
+});
+
+const logout = () => {
+  const token = useCookie('token');
+  token.value = undefined;
+  navigateTo('/login');
+};
+</script>
 
 <template>
   <div
@@ -25,9 +36,7 @@
         />
       </div>
       <div class="flex items-end justify-between mt-4">
-        <button @click="navigateTo('/login')" class="hover:underline">
-          Logout
-        </button>
+        <button @click="logout" class="hover:underline">Logout</button>
         <button @click="null" class="hover:underline">Save</button>
       </div>
     </div>
