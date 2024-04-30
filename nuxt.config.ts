@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@vueuse/nuxt'],
   runtimeConfig: {
     public: {
-      playlistId: process.env.PLAYLIST_ID,
+      jamfluencerApiBaseUrl: 'https://api.jamfluencer.app',
     },
   },
 });

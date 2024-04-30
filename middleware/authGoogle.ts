@@ -6,19 +6,13 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   try {
-    const response = await $fetch<{ token: string }>(
-      'https://api.jamfluencer.app/auth/google',
-      {
-        method: 'POST',
-        body: {
-          code,
-          redirect: window.location.origin + to.path,
-        },
-      }
-    );
+    const getAuthToken = useJamfluencerApi().getGoogleAuthToken(code);
+    await getAuthToken.execute();
+
+    if (!getAuthToken.data.value?.token) throw new Error('Invalid token');
 
     const token = useCookie<string>('token', { maxAge: 24 * 60 * 60 });
-    token.value = response.token;
+    token.value = getAuthToken.data.value.token;
 
     const intended = useCookie('intended');
     const redirect = intended.value;

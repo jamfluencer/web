@@ -9,6 +9,14 @@ const logout = () => {
   token.value = undefined;
   navigateTo('/login');
 };
+
+const getSpotifyAuthUrl = useJamfluencerApi().getSpotifyAuthUrl();
+
+const onClickAuthSpotify = async () => {
+  await getSpotifyAuthUrl.execute();
+  if (!getSpotifyAuthUrl.data.value) return;
+  console.log(getSpotifyAuthUrl.data.value);
+};
 </script>
 
 <template>
@@ -21,8 +29,8 @@ const logout = () => {
     >
       <div>
         <button
-          @click="null"
           class="bg-green-500 hover:bg-green-400 text-black rounded px-4 py-2 transition-colors block w-full"
+          @click="onClickAuthSpotify"
         >
           Authorize Spotify
         </button>
@@ -40,5 +48,6 @@ const logout = () => {
         <button @click="null" class="hover:underline">Save</button>
       </div>
     </div>
+    <button @click="navigateTo('/')" class="hover:underline">Back home</button>
   </div>
 </template>

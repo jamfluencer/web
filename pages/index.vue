@@ -19,13 +19,24 @@ const isOffAir = ref(false);
 <template>
   <div class="h-screen" tabindex="0">
     <AppBg :current-track="currentTrack" :is-off-air="isOffAir" />
-    <div id="header" class="fixed left-0 top-0 px-12 py-6 z-10">
-      <div class="group cursor-pointer">
-        <span class="group-hover:text-primary transition-colors"
-          >jamfluencer</span
-        >.app
+
+    <div id="header" class="fixed left-0 top-0 w-full px-12 py-6 z-10">
+      <div class="flex justify-between">
+        <div class="group cursor-default">
+          <span class="group-hover:text-primary transition-colors"
+            >jamfluencer</span
+          >.app
+        </div>
+        <button
+          v-if="isAuthenticated()"
+          class="hover:underline"
+          @click="navigateTo('/admin')"
+        >
+          admin
+        </button>
       </div>
     </div>
+
     <div id="main" class="fixed left-0 bottom-0 w-full p-12 z-10">
       <div class="flex items-end">
         <template v-if="!isOffAir">

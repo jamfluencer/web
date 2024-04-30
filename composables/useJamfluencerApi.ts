@@ -1,25 +1,53 @@
 export const useJamfluencerApi = () => {
-  const baseUrl = 'https://api.jamfluencer.app';
-  const getUrl = (route: string) => `${baseUrl}/${route}`;
+  const config = useRuntimeConfig();
+  const GOOGLE_REDIRECT_URI = `${window.location.origin}/auth/google/callback`;
 
-  const {
-    data: googleAuthUrl,
-    error: googleAuthUrlError,
-    status: getGoogleAuthUrlStatus,
-    execute: getGoogleAuthUrl,
-  } = useFetch<JamfluencerApi.GetGoogleAuthResponse>(getUrl('auth/google'), {
-    query: {
-      redirect: window.location.origin + '/auth/google/callback',
-    },
-    immediate: false,
-  });
+  const getGoogleAuthUrl = () => {
+    const request = useFetch<{ url: string }>('auth/google', {
+      query: { redirect: GOOGLE_REDIRECT_URI },
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      immediate: false,
+    });
+
+    return {
+      data: request.data,
+      execute: request.execute,
+      isPending: computed(() => request.status.value === 'pending'),
+    };
+  };
+
+  const getGoogleAuthToken = (code: string) => {
+    const request = useFetch<{ token: string }>('auth/google', {
+      method: 'POST',
+      body: { code, redirect: GOOGLE_REDIRECT_URI },
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      immediate: false,
+    });
+
+    return {
+      data: request.data,
+      execute: request.execute,
+      isPending: computed(() => request.status.value === 'pending'),
+    };
+  };
+
+  const getSpotifyAuthUrl = () => {
+    const request = useFetch<{ url: string }>('v1/spotify/auth', {
+      headers: { Authorization: `Bearer ${useCookie('token').value}` },
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      immediate: false,
+    });
+
+    return {
+      data: request.data,
+      execute: request.execute,
+      isPending: computed(() => request.status.value === 'pending'),
+    };
+  };
 
   return {
-    googleAuthUrl: {
-      data: googleAuthUrl,
-      error: googleAuthUrlError,
-      isPending: computed(() => getGoogleAuthUrlStatus.value === 'pending'),
-      get: getGoogleAuthUrl,
-    },
+    getGoogleAuthUrl,
+    getGoogleAuthToken,
+    getSpotifyAuthUrl,
   };
 };
