@@ -15,7 +15,7 @@ const getSpotifyAuthUrl = useJamfluencerApi().getSpotifyAuthUrl();
 const onClickAuthSpotify = async () => {
   await getSpotifyAuthUrl.execute();
   if (!getSpotifyAuthUrl.data.value) return;
-  console.log(getSpotifyAuthUrl.data.value);
+  window.location.href = getSpotifyAuthUrl.data.value.url;
 };
 </script>
 
