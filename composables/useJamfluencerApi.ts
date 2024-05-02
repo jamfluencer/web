@@ -45,19 +45,21 @@ export const useJamfluencerApi = () => {
     };
   };
 
-  const storeSpotifyToken = (code: string) => {
-    const request = useFetch<{ token: string }>('v1/spotify/auth', {
+  const storeSpotifyToken = (code: string, onResponse?: () => void) => {
+    const request = useFetch('v1/spotify/auth', {
       method: 'POST',
       body: { code },
       headers: { Authorization: `Bearer ${useCookie('token').value}` },
       baseURL: config.public.jamfluencerApiBaseUrl,
       immediate: false,
+      onResponse,
     });
 
     return {
       data: request.data,
       execute: request.execute,
       isPending: computed(() => request.status.value === 'pending'),
+      isSuccess: computed(() => request.status.value === 'success'),
     };
   };
 
