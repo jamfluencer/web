@@ -1,6 +1,14 @@
 export const useJamfluencerApi = () => {
   const config = useRuntimeConfig();
   const GOOGLE_REDIRECT_URI = `${window.location.origin}/auth/google/callback`;
+  const authHeader = { Authorization: `Bearer ${useCookie('token').value}` };
+
+  const getUser = async () => {
+    return await $fetch<JamfluencerApi.User>(
+      'https://api.jamfluencer.app/v1/me',
+      { headers: authHeader }
+    );
+  };
 
   const getGoogleAuthUrl = () => {
     const request = useFetch<{ url: string }>('auth/google', {
@@ -33,7 +41,7 @@ export const useJamfluencerApi = () => {
 
   const getSpotifyAuthUrl = () => {
     const request = useFetch<{ url: string }>('v1/spotify/auth', {
-      headers: { Authorization: `Bearer ${useCookie('token').value}` },
+      headers: authHeader,
       baseURL: config.public.jamfluencerApiBaseUrl,
       immediate: false,
     });
@@ -49,7 +57,7 @@ export const useJamfluencerApi = () => {
     const request = useFetch('v1/spotify/auth', {
       method: 'POST',
       body: { code },
-      headers: { Authorization: `Bearer ${useCookie('token').value}` },
+      headers: authHeader,
       baseURL: config.public.jamfluencerApiBaseUrl,
       immediate: false,
       onResponse,
@@ -64,6 +72,7 @@ export const useJamfluencerApi = () => {
   };
 
   return {
+    getUser,
     getGoogleAuthUrl,
     getGoogleAuthToken,
     getSpotifyAuthUrl,

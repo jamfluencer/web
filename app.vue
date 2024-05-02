@@ -7,6 +7,14 @@ useHead({
     [route.meta.title, appConfig.title].filter(Boolean).join(' - ')
   ),
 });
+
+const user = useUser();
+
+if (isAuthenticated()) {
+  await callOnce(async () => {
+    user.value = await useJamfluencerApi().getUser();
+  });
+}
 </script>
 
 <template>

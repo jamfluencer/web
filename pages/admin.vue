@@ -4,6 +4,8 @@ definePageMeta({
   middleware: 'auth',
 });
 
+const user = useUser();
+
 const logout = () => {
   const token = useCookie('token');
   token.value = undefined;
@@ -23,7 +25,10 @@ const onClickAuthSpotify = async () => {
   <div
     class="flex flex-col gap-6 h-screen w-full items-center justify-center px-6"
   >
-    <div class="text-center">Jamfluencer Admin</div>
+    <div class="text-center flex flex-col gap-2">
+      <div class="text-lg">Jamfluencer Admin</div>
+      <div class="text-sm">Logged in as: {{ user.email }}</div>
+    </div>
     <div
       class="p-6 bg-black rounded-lg w-full max-w-xs flex flex-col gap-6 outline outline-4 outline-offset-4"
     >
