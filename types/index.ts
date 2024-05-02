@@ -25,6 +25,21 @@ declare global {
       created_at: Date;
       updated_at: Date;
       name: string;
+      has_spotify: boolean;
     }
+
+    interface Track {
+      id: string;
+      name: string;
+      album: Album;
+      artists: Artist[];
+      explicit: boolean | 'unknown';
+      playable: boolean;
+      duration: number | null;
+      uri: string;
+    }
+
+    type Album = unknown;
+    type Artist = unknown;
   }
 }

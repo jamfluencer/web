@@ -6,9 +6,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   try {
-    const storeSpotifyAuth = useJamfluencerApi().storeSpotifyToken(code, () => {
-      // TODO: Do something when the request is successful
-    });
+    const storeSpotifyAuth = useJamfluencerApi().storeSpotifyToken(code);
     await storeSpotifyAuth.execute();
   } catch (error) {
     console.error(error);

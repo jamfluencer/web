@@ -34,11 +34,18 @@ const onClickAuthSpotify = async () => {
     >
       <div>
         <button
+          v-if="!user.has_spotify"
           class="bg-green-500 hover:bg-green-400 text-black rounded px-4 py-2 transition-colors block w-full"
           @click="onClickAuthSpotify"
         >
           Authorize Spotify
         </button>
+        <div
+          v-else
+          class="border-2 border-green-500 text-green-500 rounded-lg px-4 py-2 transition-colors block w-full text-center"
+        >
+          Spotify authorized
+        </div>
       </div>
       <div class="flex flex-col gap-1">
         <label for="spotifyId" class="text-sm">Current Playlist ID</label>

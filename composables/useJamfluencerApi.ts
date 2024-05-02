@@ -4,14 +4,14 @@ export const useJamfluencerApi = () => {
   const authHeader = { Authorization: `Bearer ${useCookie('token').value}` };
 
   const getUser = async () => {
-    return await $fetch<JamfluencerApi.User>(
-      'https://api.jamfluencer.app/v1/me',
-      { headers: authHeader }
-    );
+    return await $fetch<JamfluencerApi.User>('/v1/me', {
+      headers: authHeader,
+      baseURL: config.public.jamfluencerApiBaseUrl,
+    });
   };
 
   const getGoogleAuthUrl = () => {
-    const request = useFetch<{ url: string }>('auth/google', {
+    const request = useFetch<{ url: string }>('/auth/google', {
       query: { redirect: GOOGLE_REDIRECT_URI },
       baseURL: config.public.jamfluencerApiBaseUrl,
       immediate: false,
@@ -25,7 +25,7 @@ export const useJamfluencerApi = () => {
   };
 
   const getGoogleAuthToken = (code: string) => {
-    const request = useFetch<{ token: string }>('auth/google', {
+    const request = useFetch<{ token: string }>('/auth/google', {
       method: 'POST',
       body: { code, redirect: GOOGLE_REDIRECT_URI },
       baseURL: config.public.jamfluencerApiBaseUrl,
@@ -40,7 +40,7 @@ export const useJamfluencerApi = () => {
   };
 
   const getSpotifyAuthUrl = () => {
-    const request = useFetch<{ url: string }>('v1/spotify/auth', {
+    const request = useFetch<{ url: string }>('/v1/spotify/auth', {
       headers: authHeader,
       baseURL: config.public.jamfluencerApiBaseUrl,
       immediate: false,
@@ -54,7 +54,7 @@ export const useJamfluencerApi = () => {
   };
 
   const storeSpotifyToken = (code: string, onResponse?: () => void) => {
-    const request = useFetch('v1/spotify/auth', {
+    const request = useFetch('/v1/spotify/auth', {
       method: 'POST',
       body: { code },
       headers: authHeader,
@@ -71,11 +71,19 @@ export const useJamfluencerApi = () => {
     };
   };
 
+  const getCurrentTrack = async () => {
+    return await $fetch<JamfluencerApi.Track>('/v1/spotify/current-track', {
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      headers: authHeader,
+    });
+  };
+
   return {
     getUser,
     getGoogleAuthUrl,
     getGoogleAuthToken,
     getSpotifyAuthUrl,
     storeSpotifyToken,
+    getCurrentTrack,
   };
 };
