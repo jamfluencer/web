@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       jamfluencerApiBaseUrl: 'https://api.jamfluencer.app',
+      jamfluencerWsUrl: 'wss://ws.jamfluencer.app/app/SXZDtsf4iIMDznhL',
     },
   },
 });
