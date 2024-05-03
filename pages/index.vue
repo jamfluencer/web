@@ -11,16 +11,16 @@ const actions = [
   { text: 'about', action: () => (isAboutDrawerOpen.value = true) },
 ];
 
-const currentTrack = ref<Jamfluencer.Track>(mockTracks[0]);
+const currentTrack = useCurrentlyPlaying();
 
 const playlist = usePlaylist();
 
-const isOffAir = ref(false);
+const isOffAir = useIsOffAir();
 </script>
 
 <template>
   <div class="h-screen" tabindex="0">
-    <AppBg :current-track="currentTrack" :is-off-air="isOffAir" />
+    <AppBg :is-off-air="isOffAir" />
 
     <div id="header" class="fixed left-0 top-0 w-full px-12 py-6 z-10">
       <div class="flex justify-between">

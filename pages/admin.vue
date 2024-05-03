@@ -19,6 +19,10 @@ const onClickAuthSpotify = async () => {
   if (!getSpotifyAuthUrl.data.value) return;
   window.location.href = getSpotifyAuthUrl.data.value.url;
 };
+
+const onClickStartJam = async () => {
+  await useJamfluencerApi().startJam();
+};
 </script>
 
 <template>
@@ -47,17 +51,25 @@ const onClickAuthSpotify = async () => {
           Spotify Connected
         </div>
       </div>
-      <div class="flex flex-col gap-1">
+      <!-- <div class="flex flex-col gap-1">
         <label for="spotifyId" class="text-sm">Current Playlist ID</label>
         <input
           id="spotifyId"
           type="text"
           class="block bg-white text-black rounded px-2 py-1"
         />
+      </div> -->
+      <div>
+        <button
+          class="bg-primary bg-opacity-75 hover:bg-opacity-100 text-black text-lg rounded px-4 py-4 transition-colors block w-full"
+          @click="onClickStartJam"
+        >
+          Start the Jam
+        </button>
       </div>
-      <div class="flex items-end justify-between mt-4">
+      <div class="flex items-end justify-center mt-4">
         <button @click="logout" class="hover:underline">Logout</button>
-        <button @click="null" class="hover:underline">Save</button>
+        <!-- <button @click="null" class="hover:underline">Save</button> -->
       </div>
     </div>
     <button @click="navigateTo('/')" class="hover:underline">Back home</button>

@@ -7,13 +7,17 @@ defineProps<{
 
 <template>
   <div
-    class="text-xs truncate opacity-75 flex items-center gap-1 leading-loose"
+    class="truncate opacity-75 flex items-center gap-1 leading-loose"
+    :class="{
+      'text-sm': !small,
+      'text-xs': small,
+    }"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="16"
+      :height="small ? 16 : 20"
       viewBox="0 -960 960 960"
-      width="16"
+      :width="small ? 16 : 20"
     >
       <path
         fill="currentColor"

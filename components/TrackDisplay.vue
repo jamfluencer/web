@@ -1,20 +1,24 @@
 <script setup lang="ts">
 defineProps<{
-  track: Jamfluencer.Track;
+  track: JamfluencerApi.Track | undefined;
 }>();
 </script>
 
 <template>
-  <div class="flex-auto flex gap-6 items-end">
-    <img class="w-32 h-32 rounded" :src="track.album" alt="current" />
+  <div v-if="track" class="flex-auto flex gap-6 items-end">
+    <img
+      class="w-32 h-32 rounded"
+      :src="track.album.images[0].url"
+      alt="current"
+    />
     <div class="flex flex-col gap-1">
-      <UserTag :user="track.addedBy" class="mb-2" />
       <div class="text-4xl font-bold">
-        {{ track.title }}
+        {{ track.name }}
       </div>
       <div>
-        {{ track.artist }}
+        {{ track.artists.map((artist) => artist.name).join(', ') }}
       </div>
+      <UserTag :user="track.added_by" />
     </div>
   </div>
 </template>

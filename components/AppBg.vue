@@ -1,31 +1,35 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   isOffAir: boolean;
-  currentTrack: Jamfluencer.Track;
 }>();
+
+const currentlyPlaying = useCurrentlyPlaying();
 
 const OFF_AIR_BG = '/images/test_pattern.png';
 
-const bgArt = computed(() => props.currentTrack.bg);
+const bgArt = computed(
+  () => currentlyPlaying.value?.album.images[0].url ?? OFF_AIR_BG
+);
 const bgFrom = ref<HTMLImageElement | null>(null);
 const bgTo = ref<HTMLImageElement | null>(null);
 
-watch(props.currentTrack, onTrackChange, { immediate: true });
+watch(currentlyPlaying, onTrackChange, { immediate: true });
 
-async function onTrackChange(nextTrack: Jamfluencer.Track) {
+async function onTrackChange(nextTrack: JamfluencerApi.Track | undefined) {
+  if (!nextTrack) return;
   if (!bgFrom.value || !bgTo.value) return;
 
   const bgFromEl = bgFrom.value;
   const bgToEl = bgTo.value;
 
-  bgToEl.src = nextTrack.bg;
+  bgToEl.src = nextTrack.album.images[0].url;
 
   bgFromEl.classList.add('fade-out');
   bgToEl.classList.add('fade-in');
 
   await new Promise<void>((resolve) => {
     bgToEl.addEventListener('animationend', () => {
-      bgFromEl.src = nextTrack.bg;
+      bgFromEl.src = nextTrack.album.images[0].url;
       bgFromEl.classList.remove('fade-out');
       bgToEl.classList.remove('fade-in');
       resolve();
@@ -43,7 +47,7 @@ async function onTrackChange(nextTrack: Jamfluencer.Track) {
         alt=""
       />
     </div>
-    <div v-else class="w-full h-full">
+    <div v-else class="w-full h-full blur-md scale-105">
       <img
         ref="bgFrom"
         class="absolute w-full h-full object-cover"

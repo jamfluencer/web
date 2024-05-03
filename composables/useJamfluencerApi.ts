@@ -85,6 +85,13 @@ export const useJamfluencerApi = () => {
     });
   };
 
+  const startJam = async () => {
+    await $fetch('/v1/jam/start', {
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      headers: authHeader,
+    });
+  };
+
   return {
     getUser,
     getGoogleAuthUrl,
@@ -93,5 +100,6 @@ export const useJamfluencerApi = () => {
     storeSpotifyToken,
     getCurrentTrack,
     getPlaylist,
+    startJam,
   };
 };
