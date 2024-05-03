@@ -44,7 +44,7 @@ const onClickAuthSpotify = async () => {
           v-else
           class="border-2 border-green-500 text-green-500 rounded-lg px-4 py-2 transition-colors block w-full text-center"
         >
-          Spotify authorized
+          Spotify Connected
         </div>
       </div>
       <div class="flex flex-col gap-1">

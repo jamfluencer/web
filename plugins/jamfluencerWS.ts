@@ -1,5 +1,6 @@
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
+  // const currentlyPlaying = useCurrentlyPlaying();
 
   const ws = new WebSocket(config.public.jamfluencerWsUrl);
 
@@ -15,7 +16,9 @@ export default defineNuxtPlugin(() => {
   });
 
   ws.addEventListener('message', (event) => {
-    console.log('Message from server:');
-    console.log(event.data);
+    const data = JSON.parse(event.data) as { channel: string; event: string; data: any };
+    if (data.channel === 'jam') {
+      console.log(data.data);
+    }
   });
 });

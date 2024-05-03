@@ -78,6 +78,13 @@ export const useJamfluencerApi = () => {
     });
   };
 
+  const getPlaylist = async (id: string) => {
+    return await $fetch<JamfluencerApi.Playlist>(`/v1/spotify/playlist/${id}`, {
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      headers: authHeader,
+    });
+  };
+
   return {
     getUser,
     getGoogleAuthUrl,
@@ -85,5 +92,6 @@ export const useJamfluencerApi = () => {
     getSpotifyAuthUrl,
     storeSpotifyToken,
     getCurrentTrack,
+    getPlaylist,
   };
 };

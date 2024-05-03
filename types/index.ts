@@ -28,18 +28,40 @@ declare global {
       has_spotify: boolean;
     }
 
-    interface Track {
+    interface Playlist {
+      name: string;
       id: string;
+      images: Image[];
+      tracks: Track[];
+    }
+
+    type Queue = Track[];
+
+    type RecentlyPlayed = Track[];
+
+    export interface Track {
       name: string;
       album: Album;
       artists: Artist[];
-      explicit: boolean | 'unknown';
-      playable: boolean;
-      duration: number | null;
-      uri: string;
+      id: string;
+      added_by: string;
     }
 
-    type Album = unknown;
-    type Artist = unknown;
+    export interface Album {
+      images: Image[];
+      id: string;
+      name: string;
+    }
+
+    export interface Image {
+      url: string;
+      width: number;
+      height: number;
+    }
+
+    export interface Artist {
+      id: string;
+      name: string;
+    }
   }
 }

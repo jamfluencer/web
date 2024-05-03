@@ -20,11 +20,11 @@ onKeyStroke('Escape', closeDrawer);
       }"
       v-on-click-outside="closeDrawer"
     >
-      <div class="flex flex-col gap-4 p-8">
-        <div class="text-2xl font-bold">
+      <div class="flex flex-col gap-4 p-8 h-full w-full">
+        <div class="flex-shrink-0 text-2xl font-bold">
           <slot name="title">Title</slot>
         </div>
-        <div>
+        <div class="flex-auto relative overflow-auto">
           <slot>
             <p>Content</p>
           </slot>

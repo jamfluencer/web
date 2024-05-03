@@ -13,6 +13,8 @@ const actions = [
 
 const currentTrack = ref<Jamfluencer.Track>(mockTracks[0]);
 
+const playlist = usePlaylist();
+
 const isOffAir = ref(false);
 </script>
 
@@ -64,20 +66,16 @@ const isOffAir = ref(false);
       </div>
     </div>
   </div>
-  <CommonTrackDrawer
-    v-model="isQueueDrawerOpen"
-    title="Up next"
-    :tracks="mockTracks"
-  />
+  <CommonTrackDrawer v-model="isQueueDrawerOpen" title="Up next" :tracks="[]" />
   <CommonTrackDrawer
     v-model="isRecentDrawerOpen"
     title="Recently played"
-    :tracks="mockTracks"
+    :tracks="[]"
   />
   <CommonTrackDrawer
     v-model="isPlaylistDrawerOpen"
     title="Playlist"
-    :tracks="mockTracks"
+    :tracks="playlist.tracks"
   />
   <AppAboutDrawer v-model="isAboutDrawerOpen" />
 </template>
