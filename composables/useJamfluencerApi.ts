@@ -85,11 +85,15 @@ export const useJamfluencerApi = () => {
     });
   };
 
-  const startJam = async () => {
-    await $fetch('/v1/jam/start', {
-      baseURL: config.public.jamfluencerApiBaseUrl,
-      headers: authHeader,
-    });
+  const startJam = async (id: string) => {
+    return await $fetch<JamfluencerApi.Track>(
+      `/v1/jam/start/spotify:playlist:/${id}`,
+      {
+        method: 'PUT',
+        baseURL: config.public.jamfluencerApiBaseUrl,
+        headers: authHeader,
+      }
+    );
   };
 
   return {

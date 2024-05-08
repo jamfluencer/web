@@ -18,7 +18,7 @@ if (isAuthenticated()) {
     const jamApi = useJamfluencerApi();
     try {
       user.value = await jamApi.getUser();
-      playlist.value = await jamApi.getPlaylist(WEEK_6_PLAYLIST_ID);
+      // playlist.value = await jamApi.getPlaylist(WEEK_6_PLAYLIST_ID);
     } catch (error) {
       console.error(error);
     }

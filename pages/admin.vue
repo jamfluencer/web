@@ -20,8 +20,10 @@ const onClickAuthSpotify = async () => {
   window.location.href = getSpotifyAuthUrl.data.value.url;
 };
 
+const playlistId = ref('');
+
 const onClickStartJam = async () => {
-  await useJamfluencerApi().startJam();
+  await useJamfluencerApi().startJam(playlistId.value);
 };
 </script>
 
@@ -51,13 +53,26 @@ const onClickStartJam = async () => {
           Spotify Connected
         </div>
       </div>
-      <!-- <div class="flex flex-col gap-1">
-        <label for="spotifyId" class="text-sm">Current Playlist ID</label>
+      <div class="flex flex-col gap-1">
+        <label for="playlistId" class="text-sm">Current Playlist ID</label>
         <input
-          id="spotifyId"
+          v-model="playlistId"
+          id="playlistId"
           type="text"
           class="block bg-white text-black rounded px-2 py-1"
         />
+      </div>
+      <!-- TODO: Add way to select device -->
+      <!-- <div class="flex flex-col gap-1">
+        <label for="device" class="text-sm">Device</label>
+        <select
+          id="device"
+          class="block bg-white text-black rounded px-2 py-1 w-full"
+        >
+          <option value="1">Device 1</option>
+          <option value="1">Device 2</option>
+          <option value="1">Device 3</option>
+        </select>
       </div> -->
       <div>
         <button
