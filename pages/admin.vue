@@ -25,6 +25,10 @@ const playlistId = ref('');
 const onClickStartJam = async () => {
   await useJamfluencerApi().startJam(playlistId.value);
 };
+
+const onClickStopJam = async () => {
+  await useJamfluencerApi().stopJam();
+};
 </script>
 
 <template>
@@ -80,6 +84,14 @@ const onClickStartJam = async () => {
           @click="onClickStartJam"
         >
           Start the Jam
+        </button>
+      </div>
+      <div>
+        <button
+          class="bg-primary bg-opacity-75 hover:bg-opacity-100 text-black text-lg rounded px-4 py-4 transition-colors block w-full"
+          @click="onClickStopJam"
+        >
+          Stop the Jam
         </button>
       </div>
       <div class="flex items-end justify-center mt-4">

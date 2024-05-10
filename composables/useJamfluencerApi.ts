@@ -78,8 +78,18 @@ export const useJamfluencerApi = () => {
     });
   };
 
-  const getPlaylist = async (id: string) => {
-    return await $fetch<JamfluencerApi.Playlist>(`/v1/spotify/playlist/${id}`, {
+  const getPlaylist = async () => {
+    return await $fetch<JamfluencerApi.Playlist>(`/v1/jam/playlist`, {
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      headers: authHeader,
+    });
+  };
+
+  const getQueue = async () => {
+    return await $fetch<{
+      currently_playing: JamfluencerApi.Track;
+      queue: JamfluencerApi.Queue;
+    }>(`/v1/jam/queue`, {
       baseURL: config.public.jamfluencerApiBaseUrl,
       headers: authHeader,
     });
@@ -87,13 +97,21 @@ export const useJamfluencerApi = () => {
 
   const startJam = async (id: string) => {
     return await $fetch<JamfluencerApi.Track>(
-      `/v1/jam/start/spotify:playlist:/${id}`,
+      `/v1/jam/start/spotify:playlist:${id}`,
       {
         method: 'PUT',
         baseURL: config.public.jamfluencerApiBaseUrl,
         headers: authHeader,
       }
     );
+  };
+
+  const stopJam = async () => {
+    return await $fetch(`/v1/jam/stop`, {
+      method: 'PUT',
+      baseURL: config.public.jamfluencerApiBaseUrl,
+      headers: authHeader,
+    });
   };
 
   return {
@@ -104,6 +122,8 @@ export const useJamfluencerApi = () => {
     storeSpotifyToken,
     getCurrentTrack,
     getPlaylist,
+    getQueue,
     startJam,
+    stopJam,
   };
 };
