@@ -49,17 +49,15 @@ export default defineNuxtPlugin(() => {
       data: any;
     };
     if (data.channel === 'jam') {
-      if (data.event === 'jam.status') {
-        getData();
-      }
-      if (data.event === 'jam.start') {
-        getData();
-      }
-      if (data.event === 'jam.end') {
-        clearData();
-      }
-      if (data.event === 'jam.update') {
-        getData();
+      switch (data.event) {
+        case 'pusher_internal:subscription_succeeded':
+        case 'jam.start':
+        case 'jam.update':
+          await getData();
+          break;
+        case 'jam.end':
+          clearData();
+          break;
       }
     }
   });
