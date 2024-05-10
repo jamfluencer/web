@@ -81,7 +81,6 @@ export const useJamfluencerApi = () => {
   const getPlaylist = async () => {
     return await $fetch<JamfluencerApi.Playlist>(`/v1/jam/playlist`, {
       baseURL: config.public.jamfluencerApiBaseUrl,
-      headers: authHeader,
     });
   };
 
@@ -91,7 +90,6 @@ export const useJamfluencerApi = () => {
       queue: JamfluencerApi.Queue;
     }>(`/v1/jam/queue`, {
       baseURL: config.public.jamfluencerApiBaseUrl,
-      headers: authHeader,
     });
   };
 
