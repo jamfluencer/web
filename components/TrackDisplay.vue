@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  track: JamfluencerApi.Track | undefined;
+  track: JamfluencerApi.Track | null | undefined;
 }>();
 </script>
 

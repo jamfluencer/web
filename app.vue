@@ -9,21 +9,16 @@ useHead({
 });
 
 const user = useUser();
-const playlist = usePlaylist();
 
-const WEEK_6_PLAYLIST_ID = '4VKwhS5StArri0Rz0eJZdE';
-
-if (isAuthenticated()) {
-  await callOnce(async () => {
-    const jamApi = useJamfluencerApi();
-    try {
-      user.value = await jamApi.getUser();
-      // playlist.value = await jamApi.getPlaylist(WEEK_6_PLAYLIST_ID);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+async function setUser() {
+  try {
+    user.value = await useJamfluencerApi().getUser();
+  } catch (error) {
+    console.error(error);
+  }
 }
+
+if (isAuthenticated()) callOnce(setUser);
 </script>
 
 <template>

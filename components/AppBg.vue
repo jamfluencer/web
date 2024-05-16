@@ -15,7 +15,7 @@ const bgTo = ref<HTMLImageElement | null>(null);
 
 watch(currentlyPlaying, onTrackChange, { immediate: true });
 
-async function onTrackChange(nextTrack: JamfluencerApi.Track | undefined) {
+async function onTrackChange(nextTrack: typeof currentlyPlaying.value) {
   if (!nextTrack) return;
   if (!bgFrom.value || !bgTo.value) return;
 

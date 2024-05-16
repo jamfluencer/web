@@ -1,11 +1,15 @@
-export const useUser = () => useState<JamfluencerApi.User>('user');
+export const useUser = () => useState<JamfluencerApi.User | undefined>('user');
+
 export const useCurrentlyPlaying = () =>
-  useState<JamfluencerApi.Track | undefined>(
-    'currentlyPlaying',
-    () => undefined
-  );
-export const usePlaylist = () => useState<JamfluencerApi.Playlist>('playlist');
-export const useQueue = () => useState<JamfluencerApi.Queue>('queue');
+  useState<JamfluencerApi.Track | null | undefined>('currentlyPlaying');
+
+export const usePlaylist = () =>
+  useState<JamfluencerApi.Playlist | null | undefined>('playlist');
+
+export const useQueue = () =>
+  useState<JamfluencerApi.Queue | null | undefined>('queue');
+
 export const useRecentlyPlayed = () =>
-  useState<JamfluencerApi.RecentlyPlayed>('recentlyPlayed');
+  useState<JamfluencerApi.RecentlyPlayed | null | undefined>('recentlyPlayed');
+
 export const useIsOffAir = () => computed(() => !useCurrentlyPlaying().value);

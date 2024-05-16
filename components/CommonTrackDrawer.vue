@@ -3,14 +3,17 @@ const isOpen = defineModel<boolean>({ required: true });
 
 defineProps<{
   title: string;
-  tracks: JamfluencerApi.Track[];
+  tracks: JamfluencerApi.Track[] | null | undefined;
 }>();
 </script>
 
 <template>
   <CommonDrawer v-model="isOpen">
     <template #title>{{ title }}</template>
-    <ol class="flex flex-col gap-4 absolute top-0 left-0 w-full h-full">
+    <ol
+      v-if="tracks"
+      class="flex flex-col gap-4 absolute top-0 left-0 w-full h-full"
+    >
       <li
         v-for="track in tracks"
         :key="track.id"
@@ -30,5 +33,8 @@ defineProps<{
         </div>
       </li>
     </ol>
+    <div v-else>
+      {{ `No data :(` }}
+    </div>
   </CommonDrawer>
 </template>

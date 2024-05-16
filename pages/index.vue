@@ -1,12 +1,10 @@
 <script setup lang="ts">
 const isQueueDrawerOpen = ref(false);
-// const isRecentDrawerOpen = ref(false);
 const isAboutDrawerOpen = ref(false);
 const isPlaylistDrawerOpen = ref(false);
 
 const actions = [
   { text: 'queue', action: () => (isQueueDrawerOpen.value = true) },
-  // { text: 'recent', action: () => (isRecentDrawerOpen.value = true) },
   { text: 'playlist', action: () => (isPlaylistDrawerOpen.value = true) },
   { text: 'about', action: () => (isAboutDrawerOpen.value = true) },
 ];
@@ -71,11 +69,6 @@ const isOffAir = useIsOffAir();
     title="Up next"
     :tracks="queue"
   />
-  <!-- <CommonTrackDrawer
-    v-model="isRecentDrawerOpen"
-    title="Recently played"
-    :tracks="[]"
-  /> -->
   <CommonTrackDrawer
     v-model="isPlaylistDrawerOpen"
     title="Playlist"

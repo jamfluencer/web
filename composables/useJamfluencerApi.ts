@@ -71,13 +71,6 @@ export const useJamfluencerApi = () => {
     };
   };
 
-  const getCurrentTrack = async () => {
-    return await $fetch<JamfluencerApi.Track>('/v1/spotify/current-track', {
-      baseURL: config.public.jamfluencerApiBaseUrl,
-      headers: authHeader,
-    });
-  };
-
   const getPlaylist = async () => {
     return await $fetch<JamfluencerApi.Playlist>(`/v1/jam/playlist`, {
       baseURL: config.public.jamfluencerApiBaseUrl,
@@ -118,7 +111,6 @@ export const useJamfluencerApi = () => {
     getGoogleAuthToken,
     getSpotifyAuthUrl,
     storeSpotifyToken,
-    getCurrentTrack,
     getPlaylist,
     getQueue,
     startJam,
