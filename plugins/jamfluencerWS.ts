@@ -1,10 +1,13 @@
-export default defineNuxtPlugin(() => {
-  const config = useRuntimeConfig();
-  const currentlyPlaying = useCurrentlyPlaying();
-  const playlist = usePlaylist();
-  const queue = useQueue();
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
 
-  const ws = new WebSocket(config.public.jamfluencerWsUrl);
+export default defineNuxtPlugin(() => {
+  const pusher = Pusher;
+
+  const config = useRuntimeConfig();
+  const playlist = usePlaylist();
+  const currentlyPlaying = useCurrentlyPlaying();
+  const queue = useQueue();
 
   async function getData() {
     playlist.value = await useJamfluencerApi().getPlaylist();
@@ -25,40 +28,21 @@ export default defineNuxtPlugin(() => {
       )?.added_by ?? '';
   }
 
-  function clearData() {
-    playlist.value.tracks = [];
-    queue.value = [];
-    currentlyPlaying.value = undefined;
-  }
-
-  ws.addEventListener('open', () => {
-    ws.send(
-      JSON.stringify({
-        event: 'pusher:subscribe',
-        data: {
-          channel: 'jam',
-        },
-      })
-    );
+  const echo = new Echo({
+    broadcaster: 'reverb',
+    key: config.public.jamfluencerWsKey,
+    wsHost: config.public.jamfluencerWsUrl,
   });
 
-  ws.addEventListener('message', async (event) => {
-    const data = JSON.parse(event.data) as {
-      channel: string;
-      event: string;
-      data: any;
-    };
-    if (data.channel === 'jam') {
-      switch (data.event) {
-        case 'pusher_internal:subscription_succeeded':
-        case 'jam.start':
-        case 'jam.update':
-          await getData();
-          break;
-        case 'jam.end':
-          clearData();
-          break;
-      }
-    }
+  const channelJam = echo.channel('jam');
+
+  channelJam.subscribed(getData);
+
+  channelJam.listen('.jam.status', () => {
+    console.log('jam.status');
+  });
+
+  channelJam.listen('.jam.update', () => {
+    console.log('jam.updated');
   });
 });
