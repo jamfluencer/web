@@ -31,8 +31,14 @@ export default function useJam() {
     }
   }
 
+  function end() {
+    queue.value = null;
+    currentlyPlaying.value = null;
+  }
+
   return {
     getPlaylist,
     getQueue,
+    end,
   };
 }

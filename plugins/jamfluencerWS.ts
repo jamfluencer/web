@@ -22,9 +22,7 @@ export default defineNuxtPlugin(() => {
 
   channelJam.subscribed(getData);
 
-  channelJam.listen('.jam.status', () => {
-    // console.log('jam.status');
-  });
-
+  channelJam.listen('.jam.start', getData);
   channelJam.listen('.jam.update', getData);
+  channelJam.listen('.jam.end', jam.end);
 });
