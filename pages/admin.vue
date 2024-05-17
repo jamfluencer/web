@@ -20,7 +20,12 @@ const onClickAuthSpotify = async () => {
   window.location.href = getSpotifyAuthUrl.data.value.url;
 };
 
-const playlistId = ref('');
+const playlistUrl = ref('');
+const playlistId = computed(() => {
+  // match the id from this: https://open.spotify.com/playlist/1N99pr8GldqK5twnOduUtv?si=d580f54397c64040
+  const match = playlistUrl.value.match(/playlist\/(.*)\?/);
+  return match ? match[1] : '';
+});
 
 const onClickStartJam = async () => {
   await useJamfluencerApi().startJam(playlistId.value);
@@ -58,10 +63,10 @@ const onClickStopJam = async () => {
         </div>
       </div>
       <div class="flex flex-col gap-1">
-        <label for="playlistId" class="text-sm">Current Playlist ID</label>
+        <label for="playlistUrl" class="text-sm">Current Playlist URL</label>
         <input
-          v-model="playlistId"
-          id="playlistId"
+          v-model="playlistUrl"
+          id="playlistUrl"
           type="text"
           class="block bg-white text-black rounded px-2 py-1"
         />
