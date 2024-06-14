@@ -24,6 +24,9 @@ onKeyStroke('Escape', closeDrawer);
         <div class="flex-shrink-0 text-2xl font-bold">
           <slot name="title">Title</slot>
         </div>
+        <div class="flex-shrink-0 font-bold empty:hidden">
+          <slot name="subtitle" />
+        </div>
         <div class="flex-auto relative overflow-auto">
           <slot>
             <p>Content</p>

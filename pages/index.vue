@@ -72,6 +72,7 @@ const isOffAir = useIsOffAir();
   <CommonTrackDrawer
     v-model="isPlaylistDrawerOpen"
     title="Playlist"
+    :subtitle="playlist?.name"
     :tracks="playlist?.tracks"
   />
   <AppAboutDrawer v-model="isAboutDrawerOpen" />
