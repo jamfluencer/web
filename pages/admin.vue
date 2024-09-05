@@ -20,6 +20,14 @@ const onClickAuthSpotify = async () => {
   window.location.href = getSpotifyAuthUrl.data.value.url;
 };
 
+const date = ref(
+  new Date().toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
+);
+
 const playlistUrl = ref('');
 const playlistId = computed(() => {
   // match the id from this: https://open.spotify.com/playlist/1N99pr8GldqK5twnOduUtv?si=d580f54397c64040
@@ -27,8 +35,14 @@ const playlistId = computed(() => {
   return match ? match[1] : '';
 });
 
+const jamUrl = ref('');
+
 const onClickStartJam = async () => {
-  await useJamfluencerApi().startJam(playlistId.value);
+  await useJamfluencerApi().startJam({
+    date: date.value,
+    playlistId: playlistId.value,
+    jamUrl: jamUrl.value,
+  });
 };
 
 const onClickStopJam = async () => {
@@ -62,27 +76,35 @@ const onClickStopJam = async () => {
           Spotify Connected
         </div>
       </div>
-      <div class="flex flex-col gap-1">
-        <label for="playlistUrl" class="text-sm">Current Playlist URL</label>
-        <input
-          v-model="playlistUrl"
-          id="playlistUrl"
-          type="text"
-          class="block bg-white text-black rounded px-2 py-1"
-        />
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <label for="date" class="text-sm">Date</label>
+          <input
+            v-model="date"
+            id="date"
+            type="text"
+            class="block bg-white text-black rounded px-2 py-1"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="playlistUrl" class="text-sm">Playlist URL</label>
+          <input
+            v-model="playlistUrl"
+            id="playlistUrl"
+            type="text"
+            class="block bg-white text-black rounded px-2 py-1"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="jamUrl" class="text-sm">Jam URL</label>
+          <input
+            v-model="jamUrl"
+            id="jamUrl"
+            type="text"
+            class="block bg-white text-black rounded px-2 py-1"
+          />
+        </div>
       </div>
-      <!-- TODO: Add way to select device -->
-      <!-- <div class="flex flex-col gap-1">
-        <label for="device" class="text-sm">Device</label>
-        <select
-          id="device"
-          class="block bg-white text-black rounded px-2 py-1 w-full"
-        >
-          <option value="1">Device 1</option>
-          <option value="1">Device 2</option>
-          <option value="1">Device 3</option>
-        </select>
-      </div> -->
       <div>
         <button
           class="bg-primary bg-opacity-75 hover:bg-opacity-100 text-black text-lg rounded px-4 py-4 transition-colors block w-full"

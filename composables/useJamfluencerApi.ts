@@ -86,9 +86,18 @@ export const useJamfluencerApi = () => {
     });
   };
 
-  const startJam = async (id: string) => {
+  const startJam = async ({
+    date,
+    playlistId,
+    jamUrl,
+  }: {
+    date: string;
+    playlistId: string;
+    jamUrl: string;
+  }) => {
+    // TODO: Need to be able to send Date and Jam URLs
     return await $fetch<JamfluencerApi.Track>(
-      `/v1/jam/start/spotify:playlist:${id}`,
+      `/v1/jam/start/spotify:playlist:${playlistId}`,
       {
         method: 'PUT',
         baseURL: config.public.jamfluencerApiBaseUrl,
