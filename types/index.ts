@@ -50,4 +50,11 @@ declare global {
       name: string;
     }
   }
+
+  namespace JamfluencerV2Api {
+    interface StartJamBody {
+      jam: string;
+      playlist: string;
+    }
+  }
 }
