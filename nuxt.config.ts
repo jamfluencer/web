@@ -11,4 +11,9 @@ export default defineNuxtConfig({
       jamfluencerWsKey: 'SXZDtsf4iIMDznhL',
     },
   },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => ['search'].includes(tag),
+    }
+  }
 });
