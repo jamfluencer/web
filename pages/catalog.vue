@@ -18,7 +18,7 @@ const searchCatalog = async () => {
 	>
 		<div class="text-center flex flex-col gap-2">
 			<div>
-				Want to know if a track, album, or artist has been played in a Jam before? Search here!
+				Want to know if a track or artist has been played in a Jam before? Search here!
 			</div>
 			<search class="flex justify-center">
 				<div class="relative w-5/6">
@@ -47,18 +47,18 @@ const searchCatalog = async () => {
 							v-for="playlist in track.playlists">{{ playlist.name }} </span></li>
 					</ul>
 				</div>
-				<div v-if="results.albums&&results.albums.length">
-					<h3 class="capitalize">Albums</h3>
-					<ul class="list-image-none">
-						<li v-for="album in results.albums"><a :href=album.url>{{ album.name }}</a> appears in <span
-							v-for="playlist in album.playlists">{{ playlist.name }} </span></li>
-					</ul>
-				</div>
+<!--				<div v-if="results.albums&&results.albums.length">-->
+<!--					<h3 class="capitalize">Albums</h3>-->
+<!--					<ul class="list-image-none">-->
+<!--						<li v-for="album in results.albums"><a :href=album.url>{{ album.name }}</a> appears in <span-->
+<!--							v-for="playlist in album.playlists">{{ playlist.name }} </span></li>-->
+<!--					</ul>-->
+<!--				</div>-->
 				<div v-if="results.artists&&results.artists.length">
 					<h3 class="capitalize">Artists</h3>
 					<ul class="list-image-none">
-						<li v-for="artist in results.artists"><a :href=artist.url>{{ artist.name }}</a> appears in <span
-							v-for="playlist in artist.playlists">{{ playlist.name }} </span></li>
+						<li v-for="artist in results.artists" :key="artist.id"><a :href=artist.uri>{{ artist.name }}</a> appears in <span
+							v-for="track in artist.tracks" :key="track.id"><span v-for="playlist in track.playlists">{{ playlist.name }}</span></span></li>
 					</ul>
 				</div>
 			</div>
