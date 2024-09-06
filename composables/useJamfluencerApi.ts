@@ -105,6 +105,13 @@ export const useJamfluencerApi = () => {
     });
   };
 
+  const searchCatalog = async (term: string) => {
+    return await $fetch('/v1/catalog/search?term=' + term, {
+      method: 'GET',
+      baseURL: config.public.jamfluencerApiBaseUrl
+    })
+  }
+
   return {
     getUser,
     getGoogleAuthUrl,
@@ -115,5 +122,6 @@ export const useJamfluencerApi = () => {
     getQueue,
     startJam,
     stopJam,
+    searchCatalog,
   };
 };
