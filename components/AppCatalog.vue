@@ -1,7 +1,5 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Catalog',
-});
+const isOpen = defineModel<boolean>({ required: true });
 
 const searchTerm = ref('');
 
@@ -10,13 +8,26 @@ const results = ref();
 const searchCatalog = async () => {
   results.value = await useJamfluencerApi().searchCatalog(searchTerm.value);
 };
+
+const appCatalog = ref();
+const { activate: trapFocus, deactivate: releaseFocus } = useFocusTrap(
+  appCatalog,
+  { allowOutsideClick: true }
+);
+
+watch(isOpen, async (val) => {
+  if (val) {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    trapFocus();
+  } else {
+    releaseFocus();
+  }
+});
 </script>
 
 <template>
-  <div
-    class="flex flex-col gap-6 h-screen w-full items-center justify-center px-6"
-  >
-    <div class="text-center flex flex-col gap-4">
+  <CommonDialog v-model="isOpen">
+    <div ref="appCatalog" class="text-center flex flex-col gap-4">
       <div>
         Want to know if a track or artist has been played in a Jam before?
       </div>
@@ -87,5 +98,5 @@ const searchCatalog = async () => {
         </div>
       </div>
     </div>
-  </div>
+  </CommonDialog>
 </template>
