@@ -15,5 +15,6 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => ['search'].includes(tag),
     }
-  }
+  },
+  compatibilityDate: '2024-09-09'
 });
