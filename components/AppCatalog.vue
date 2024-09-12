@@ -109,7 +109,7 @@ watch(isOpen, async (val) => {
                     </div>
                     <div class="flex flex-row gap-2" v-for="playlist in track.playlists" :key="playlist.id">
                       <UserTag :user="playlist.pivot.added_by" small/>
-                      <div class="text-xs opacity-75 leading-loose">{{ playlist.name}}</div>
+                      <div class="text-xs opacity-75 leading-loose"><a :href="playlist.url">{{ playlist.name}}</a></div>
                     </div>
                   </div>
                 </div>
