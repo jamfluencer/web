@@ -102,7 +102,7 @@ watch(isOpen, async (val) => {
                   />
                   <div class="flex flex-col overflow-hidden">
                     <div class="font-bold text-sm truncate">
-                      {{ track.name }}
+                      <a :href="track.url">{{ track.name }}</a>
                     </div>
                     <div class="text-xs truncate">
                       {{ track.artists.map((a) => a.name).join(', ') }}
