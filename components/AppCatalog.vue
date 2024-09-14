@@ -97,7 +97,7 @@ watch(isOpen, async (val) => {
                 <div class="flex gap-4 items-center bg-slate-800 rounded p-1">
                   <img
                       class="w-16 h-16 rounded"
-                      src="https://i.scdn.co/image/ab67616d0000b2732042af06357dd5ab2220e33f"
+                      :src="track.album.images.filter((image) => image.width <= 64).at(0)?.url"
                       :alt="`${track.name} cover`"
                   />
                   <div class="flex flex-col overflow-hidden">
