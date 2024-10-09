@@ -1,7 +1,7 @@
-export {};
+export { };
 
 declare global {
-  namespace Jamfluencer {}
+  namespace Jamfluencer { }
 
   namespace JamfluencerApi {
     interface User {
@@ -51,19 +51,20 @@ declare global {
     }
 
     export type CatalogSearchResponse = {
-      tracks: JamfluencerApi.CatalogTrack[];
-      artists: JamfluencerApi.CatalogArtist[];
+      tracks?: JamfluencerApi.CatalogTrack[];
+      artists?: JamfluencerApi.CatalogArtist[];
     } | [];
-    
+
     export interface CatalogTrack {
-        created_at: Date;
-        id: string;
-        name: string;
-        playlists: CatalogPlaylist[];
-        updated_at: Date;
-        artists: Array<Omit<CatalogArtist, 'tracks'> & {
-          pivot: CatalogTrackArtistPivot;
-        }>;
+      created_at: Date;
+      id: string;
+      name: string;
+      playlists: CatalogPlaylist[];
+      updated_at: Date;
+      artists: Array<Omit<CatalogArtist, 'tracks'> & {
+        pivot: CatalogTrackArtistPivot;
+      }>;
+      url: string;
     }
 
     export interface CatalogArtist {
@@ -75,26 +76,26 @@ declare global {
       tracks: Array<Omit<CatalogTrack, 'artists'> & {
         pivot: CatalogTrackArtistPivot;
       }>;
-  }
-    
-    export interface CatalogTrackArtistPivot {
-        track_id: string;
-        artist_id: string;
     }
-    
+
+    export interface CatalogTrackArtistPivot {
+      artist_id: string;
+      track_id: string;
+    }
+
     export interface CatalogPlaylist {
-        id: string;
-        name: string;
-        url: string;
-        snapshot: string;
+      created_at: Date;
+      id: string;
+      name: string;
+      snapshot: string;
+      updated_at: Date;
+      url: string;
+      pivot: {
+        added_by: string;
         created_at: Date;
+        playlist_id: string;
+        track_id: string;
         updated_at: Date;
-        pivot: {
-          track_id: string;
-          playlist_id: string;
-          added_by: string;
-          created_at: Date;
-          updated_at: Date;
       };
     }
 
