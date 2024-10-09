@@ -4,6 +4,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['@/assets/css/main.css'],
   modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@vueuse/nuxt'],
+  imports: {
+    presets: [
+      {
+        from: '@vueuse/integrations/useFocusTrap',
+        imports: ['useFocusTrap'],
+      }
+    ],
+  },
   runtimeConfig: {
     public: {
       jamfluencerApiBaseUrl: 'https://api.jamfluencer.app',

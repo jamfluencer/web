@@ -2,6 +2,7 @@
 const isQueueDrawerOpen = ref(false);
 const isAboutDrawerOpen = ref(false);
 const isPlaylistDrawerOpen = ref(false);
+const isCatalogOpen = ref(false);
 
 const actions = [
   { text: 'queue', action: () => (isQueueDrawerOpen.value = true) },
@@ -27,13 +28,21 @@ const isOffAir = useIsOffAir();
             >jamfluencer</span
           >.app
         </div>
-        <button
-          v-if="isAuthenticated()"
-          class="hover:underline"
-          @click="navigateTo('/admin')"
-        >
-          admin
-        </button>
+        <div class="flex gap-4">
+          <button
+            class="hover:underline focus:underline underline-offset-8"
+            @click="isCatalogOpen = true"
+          >
+            catalog
+          </button>
+          <button
+            v-if="!isAuthenticated()"
+            class="hover:underline focus:underline underline-offset-8"
+            @click="navigateTo('/admin')"
+          >
+            admin
+          </button>
+        </div>
       </div>
     </div>
 
@@ -76,4 +85,5 @@ const isOffAir = useIsOffAir();
     :tracks="playlist?.tracks"
   />
   <AppAboutDrawer v-model="isAboutDrawerOpen" />
+  <AppCatalog v-model="isCatalogOpen" />
 </template>

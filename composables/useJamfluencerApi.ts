@@ -106,7 +106,7 @@ export const useJamfluencerApi = () => {
   };
 
   const searchCatalog = async (term: string) => {
-    return await $fetch('/v1/catalog/search?term=' + term, {
+    return await $fetch<JamfluencerApi.CatalogSearchResponse>('/v1/catalog/search?term=' + term, {
       method: 'GET',
       baseURL: config.public.jamfluencerApiBaseUrl
     })
