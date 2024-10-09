@@ -39,6 +39,10 @@ const onClickStartJam = async () => {
 const onClickStopJam = async () => {
   await useJamfluencerApi().stopJam();
 };
+
+async function startLegacyJam() {
+  await useJamfluencerApi().startJam(playlistId.value);
+}
 </script>
 
 <template>
@@ -86,6 +90,9 @@ const onClickStopJam = async () => {
             class="block bg-white text-black rounded px-2 py-1"
           />
         </div>
+      </div>
+      <div>
+        <button @click="startLegacyJam">Start Legacy Jam</button>
       </div>
       <div>
         <button

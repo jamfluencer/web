@@ -110,7 +110,14 @@ export const useJamfluencerApi = () => {
       method: 'GET',
       baseURL: config.public.jamfluencerApiBaseUrl
     })
-  }
+  };
+
+  const giveKudosCurrentTrack = async () => {
+    return await $fetch('/v1/jam/kudos', {
+      method: 'POST',
+      baseURL: config.public.jamfluencerApiBaseUrl,
+    });
+  };
 
   return {
     getUser,
@@ -123,5 +130,6 @@ export const useJamfluencerApi = () => {
     startJam,
     stopJam,
     searchCatalog,
+    giveKudosCurrentTrack,
   };
 };
