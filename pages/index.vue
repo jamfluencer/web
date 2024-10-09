@@ -36,7 +36,7 @@ const isOffAir = useIsOffAir();
             catalog
           </button>
           <button
-            v-if="!isAuthenticated()"
+            v-if="isAuthenticated()"
             class="hover:underline focus:underline underline-offset-8"
             @click="navigateTo('/admin')"
           >
