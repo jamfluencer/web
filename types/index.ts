@@ -37,6 +37,7 @@ declare global {
       images: Image[];
       id: string;
       name: string;
+      link: string;
     }
 
     export interface Image {
@@ -65,6 +66,7 @@ declare global {
         pivot: CatalogTrackArtistPivot;
       }>;
       url: string;
+      album: Album
     }
 
     export interface CatalogArtist {
