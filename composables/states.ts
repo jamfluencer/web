@@ -13,3 +13,14 @@ export const useRecentlyPlayed = () =>
   useState<JamfluencerApi.RecentlyPlayed | null | undefined>('recentlyPlayed');
 
 export const useIsOffAir = () => computed(() => !useCurrentlyPlaying().value);
+
+export const useNotifications = () => useState<Jamfluencer.Notification[]>('notifications', () => []);
+
+export function addNotification(message: string, type: 'error' | 'info' = 'info') {
+  const notifications = useNotifications();
+  notifications.value.push({
+    id: crypto.randomUUID(),
+    message,
+    type,
+  });
+}
