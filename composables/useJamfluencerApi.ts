@@ -87,22 +87,48 @@ export const useJamfluencerApi = () => {
   };
 
   const startJam = async (id: string) => {
-    return await $fetch<JamfluencerApi.Track>(
-      `/v1/jam/start/spotify:playlist:${id}`,
-      {
-        method: 'PUT',
-        baseURL: config.public.jamfluencerApiBaseUrl,
-        headers: authHeader,
-      }
-    );
+    const errorBaseMessage = 'Failed to start Jam (v1)';
+    try {
+      await $fetch<JamfluencerApi.Track>(
+        `/v1/jam/start/spotify:playlist:${id}`,
+        {
+          method: 'PUT',
+          baseURL: config.public.jamfluencerApiBaseUrl,
+          headers: authHeader,
+          onResponseError: (error) => {
+            const messageArr = [errorBaseMessage];
+            const errorMessage = error.response._data?.error?.message as string | undefined;
+            if (errorMessage) messageArr.push(errorMessage);
+            addNotification(messageArr.join(': '), 'error');
+          },
+        },
+      );
+      addNotification('Legacy Jam started!');
+      return;
+    } catch (error) {
+      console.error(errorBaseMessage, error);
+    }
   };
 
   const stopJam = async () => {
-    return await $fetch(`/v1/jam/stop`, {
-      method: 'PUT',
-      baseURL: config.public.jamfluencerApiBaseUrl,
-      headers: authHeader,
-    });
+    const errorBaseMessage = 'Failed to stop Jam (v1)';
+    try {
+      await $fetch(`/v1/jam/stop`, {
+        method: 'PUT',
+        baseURL: config.public.jamfluencerApiBaseUrl,
+        headers: authHeader,
+        onResponseError: (error) => {
+          const messageArr = [errorBaseMessage];
+          const errorMessage = error.response._data?.error?.message as string | undefined;
+          if (errorMessage) messageArr.push(errorMessage);
+          addNotification(messageArr.join(': '), 'error');
+        },
+      });
+      addNotification('Jam stopped');
+      return;
+    } catch (error) {
+      console.error(errorBaseMessage, error);
+    }
   };
 
   const searchCatalog = async (term: string) => {

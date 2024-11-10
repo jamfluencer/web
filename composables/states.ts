@@ -21,3 +21,14 @@ export const useKudos = () => useState<{
   id: 0,
   stack: [],
 }));
+
+export const useNotifications = () => useState<Jamfluencer.Notification[]>('notifications', () => []);
+
+export function addNotification(message: string, type: 'error' | 'info' = 'info') {
+  const notifications = useNotifications();
+  notifications.value.push({
+    id: crypto.randomUUID(),
+    message,
+    type,
+  });
+}

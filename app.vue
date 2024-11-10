@@ -24,5 +24,6 @@ if (isAuthenticated()) callOnce(setUser);
 <template>
   <div>
     <NuxtPage />
+    <AppNotifications />
   </div>
 </template>
