@@ -4,6 +4,7 @@ import Pusher from 'pusher-js';
 export default defineNuxtPlugin(() => {
   const pusher = Pusher;
   const jam = useJam();
+  const kudos = useKudos();
 
   const config = useRuntimeConfig();
 
@@ -25,4 +26,9 @@ export default defineNuxtPlugin(() => {
   channelJam.listen('.jam.start', getData);
   channelJam.listen('.jam.update', getData);
   channelJam.listen('.jam.end', jam.end);
+
+  channelJam.listen('.kudos', () => {
+    kudos.value.stack.push(kudos.value.id);
+    kudos.value.id += 1;
+  });
 });

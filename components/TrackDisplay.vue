@@ -22,11 +22,25 @@ watch(
     kudosGiven.value = false;
   }
 );
+
+const kudos = useKudos();
+
+function onKudosAnimationEnded() {
+  kudos.value.stack.shift();
+}
 </script>
 
 <template>
   <div v-if="track" class="flex-auto flex gap-6 items-end">
     <div class="relative">
+      <div ref="kudosSpawner" class="absolute top-0 left-0 w-full -z-10">
+        <KudosIcon
+          class="absolute top-0"
+          v-for="kudo in kudos.stack"
+          :key="kudo"
+          @animation-ended="onKudosAnimationEnded"
+        />
+      </div>
       <img
         class="w-32 h-32 rounded"
         :src="track.album.images[0].url"

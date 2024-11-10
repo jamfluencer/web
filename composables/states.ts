@@ -14,6 +14,14 @@ export const useRecentlyPlayed = () =>
 
 export const useIsOffAir = () => computed(() => !useCurrentlyPlaying().value);
 
+export const useKudos = () => useState<{
+  id: number;
+  stack: number[];
+}>('kudos', () => ({
+  id: 0,
+  stack: [],
+}));
+
 export const useNotifications = () => useState<Jamfluencer.Notification[]>('notifications', () => []);
 
 export function addNotification(message: string, type: 'error' | 'info' = 'info') {
