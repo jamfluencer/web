@@ -5,13 +5,13 @@ declare global {
 
   namespace JamfluencerApi {
     interface User {
-      id: number;
+      created_at: string;
+      email_verified_at: string;
       email: string;
-      email_verified_at: Date;
-      created_at: Date;
-      updated_at: Date;
-      name: string;
       has_spotify: boolean;
+      id: number;
+      name: string;
+      updated_at: string;
     }
 
     interface Playlist {
@@ -37,7 +37,6 @@ declare global {
       images: Image[];
       id: string;
       name: string;
-      link: string;
     }
 
     export interface Image {
@@ -57,27 +56,28 @@ declare global {
     } | [];
 
     export interface CatalogTrack {
-      created_at: Date;
+      created_at: string;
       id: string;
       name: string;
       playlists: CatalogPlaylist[];
-      updated_at: Date;
+      updated_at: string;
       artists: Array<Omit<CatalogArtist, 'tracks'> & {
         pivot: CatalogTrackArtistPivot;
       }>;
       url: string;
-      album: Album
+      album: CatalogAlbum;
     }
 
     export interface CatalogArtist {
-      created_at: Date;
+      created_at: string;
       id: string;
+      link: string | null;
       name: string;
-      updated_at: Date;
-      uri: string;
       tracks: Array<Omit<CatalogTrack, 'artists'> & {
         pivot: CatalogTrackArtistPivot;
       }>;
+      updated_at: string;
+      uri: string;
     }
 
     export interface CatalogTrackArtistPivot {
@@ -85,19 +85,46 @@ declare global {
       track_id: string;
     }
 
+    export interface CatalogTrackAlbumPivot {
+      album_id: string;
+      track_id: string;
+    }
+
+    export interface CatalogAlbum {
+      created_at: string;
+      id: string;
+      images: CatalogImage[];
+      link: string | null;
+      name: string;
+      pivot: CatalogTrackAlbumPivot;
+      updated_at: string;
+      uri: string;
+    }
+
+    export interface CatalogImage {
+      created_at: string;
+      height: number;
+      id: number;
+      related_id: string;
+      related_type: string;
+      updated_at: string;
+      url: string;
+      width: number;
+    }
+
     export interface CatalogPlaylist {
-      created_at: Date;
+      created_at: string;
       id: string;
       name: string;
       snapshot: string;
-      updated_at: Date;
+      updated_at: string;
       url: string;
       pivot: {
         added_by: string;
-        created_at: Date;
+        created_at: string;
         playlist_id: string;
         track_id: string;
-        updated_at: Date;
+        updated_at: string;
       };
     }
 
