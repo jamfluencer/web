@@ -13,3 +13,11 @@ export const useRecentlyPlayed = () =>
   useState<JamfluencerApi.RecentlyPlayed | null | undefined>('recentlyPlayed');
 
 export const useIsOffAir = () => computed(() => !useCurrentlyPlaying().value);
+
+export const useKudos = () => useState<{
+  id: number;
+  stack: number[];
+}>('kudos', () => ({
+  id: 0,
+  stack: [],
+}));
