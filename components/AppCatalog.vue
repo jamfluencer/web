@@ -111,18 +111,41 @@ watch(isOpen, async (val) => {
             <ul class="flex flex-col gap-4">
               <li v-for="track in flatTracks" :key="track.id">
                 <div class="flex gap-4 items-center bg-slate-800 rounded p-2">
-                  <img
+                  <a :href="track.album.link ?? undefined">
+                    <img
                       class="w-16 h-16 rounded"
-                      :src="track.album.images.filter((image) => image.width <= 64).at(0)?.url"
+                      :src="
+                        track.album.images
+                          .filter((image) => image.width <= 64)
+                          .at(0)?.url
+                      "
                       :alt="`${track.name} cover`"
-                  />
+                    />
+                  </a>
                   <div class="flex flex-col overflow-hidden">
                     <div class="font-bold text-sm truncate">
-                      <a :href="track.url">{{ track.name }}</a>
+                      <a class="hover:underline" :href="track.url">{{
+                        track.name
+                      }}</a>
                     </div>
                     <div class="text-xs truncate">
-                      {{ track.artists.map((a) => a.name).join(', ') }}
+                      <template
+                        v-for="(artist, artistIndex) in track.artists"
+                        :key="artist.id"
+                      >
+                        <a
+                          v-if="artist.link"
+                          class="hover:underline"
+                          :href="artist.link ?? undefined"
+                          >{{ artist.name }}</a
+                        >
+                        <span v-else>{{ artist.name }}</span>
+                        <span v-if="artistIndex < track.artists.length - 1"
+                          >,&nbsp;</span
+                        >
+                      </template>
                     </div>
+                    <div class="h-1" />
                     <div
                       class="flex flex-row items-center gap-1"
                       v-for="playlist in track.playlists"
@@ -131,7 +154,9 @@ watch(isOpen, async (val) => {
                       <UserTag :user="playlist.pivot.added_by" small />
                       <div>&bull;</div>
                       <div class="text-xs opacity-75">
-                        <a :href="playlist.url">{{ playlist.name }}</a>
+                        <a class="hover:underline" :href="playlist.url">{{
+                          playlist.name
+                        }}</a>
                       </div>
                     </div>
                   </div>
