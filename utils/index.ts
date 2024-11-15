@@ -15,6 +15,7 @@ export const userMap: Record<string, string> = {
   '124576498': 'Emily aka 124576498',
   '21qi2etjlsxe4wfferqgvjb4i': 'Luke',
   'hsingh051': 'Harpreet',
+  'jwright325': 'Justin',
 } as const;
 
 export const getUser = (id: string): string => userMap[id] ?? id;
