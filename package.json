@@ -16,6 +16,7 @@
     "@vueuse/integrations": "^11.3.0",
     "@vueuse/nuxt": "^11.3.0",
     "focus-trap": "^7.6.2",
+    "gsap": "^3.12.5",
     "laravel-echo": "^1.17.0",
     "nuxt": "^3.14.1592",
     "pusher-js": "^8.4.0-rc2",
