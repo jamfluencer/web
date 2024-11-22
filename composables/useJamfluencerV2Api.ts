@@ -27,7 +27,16 @@ export const useJamfluencerV2Api = () => {
     }
   };
 
+  const setJamUrl = async (body: unknown) => { };
+
+  const setPlaylist = async (body: unknown) => { };
+
+  const startSlackWorkflow = async (body: unknown) => { };
+
   return {
     startJam,
+    setJamUrl,
+    setPlaylist,
+    startSlackWorkflow,
   };
 };
