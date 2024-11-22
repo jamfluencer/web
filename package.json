@@ -10,21 +10,21 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/image": "^1.8.0",
-    "@vueuse/components": "^11.0.3",
-    "@vueuse/core": "^11.0.3",
-    "@vueuse/integrations": "^11.0.3",
-    "@vueuse/nuxt": "^11.0.3",
-    "focus-trap": "^7.5.4",
-    "laravel-echo": "^1.16.1",
-    "nuxt": "^3.13.1",
+    "@nuxt/image": "^1.8.1",
+    "@vueuse/components": "^11.3.0",
+    "@vueuse/core": "^11.3.0",
+    "@vueuse/integrations": "^11.3.0",
+    "@vueuse/nuxt": "^11.3.0",
+    "focus-trap": "^7.6.2",
+    "laravel-echo": "^1.17.0",
+    "nuxt": "^3.14.1592",
     "pusher-js": "^8.4.0-rc2",
-    "vue": "^3.5.3",
-    "vue-router": "^4.4.3"
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-module": "^4.1.0",
-    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@nuxtjs/tailwindcss": "^6.12.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "eslint": "^8.57.0"
   }
