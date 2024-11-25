@@ -20,5 +20,5 @@ watch(
 </script>
 
 <template>
-  <div class="text-[4vw]/[1]">2</div>
+  <div class="text-[7.2vw]/[1] lg:text-[4vw]/[1]">2</div>
 </template>
