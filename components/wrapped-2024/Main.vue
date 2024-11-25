@@ -58,7 +58,10 @@ async function onRemoteClickPower() {
 
 <template>
   <div class="bg-black w-full h-screen flex items-center justify-center">
-    <div class="relative w-[50vw]" :style="{ aspectRatio: '1.4563' }">
+    <div
+      class="relative w-[90vw] lg:w-[50vw]"
+      :style="{ aspectRatio: '1.4563' }"
+    >
       <div
         class="absolute top-0 left-0 w-full h-full flex items-center justify-center pl-[6%] pr-[25.8%] pt-[8.2%] pb-[6.8%]"
       >
@@ -68,13 +71,15 @@ async function onRemoteClickPower() {
           :class="{ hidden: tvChannel !== 1 }"
         >
           <div>
-            <div class="text-center text-[1.7vw]/[1]">2024 Jamfluencer</div>
+            <div class="text-center text-[3.06vw]/[1] lg:text-[1.7vw]/[1]">
+              2024 Jamfluencer
+            </div>
             <div class="flex">
               <div
                 :id="`wrapped-letter-${index}`"
                 v-for="(letter, index) in titleLetters"
                 :key="index"
-                class="text-[4vw]/[1]"
+                class="text-[7.2vw]/[1] lg:text-[4vw]/[1]"
               >
                 {{ letter }}
               </div>
