@@ -145,6 +145,13 @@ export const useJamfluencerApi = () => {
     });
   };
 
+  const getWrapped2024 = async (uuid: string) => {
+    return await $fetch<JamfluencerApi.Wrapped2024.Wrapped>('/v1/wrapped/' + uuid, {
+      method: 'GET',
+      baseURL: config.public.jamfluencerApiBaseUrl
+    });
+  };
+
   return {
     getUser,
     getGoogleAuthUrl,
@@ -157,5 +164,6 @@ export const useJamfluencerApi = () => {
     stopJam,
     searchCatalog,
     giveKudosCurrentTrack,
+    getWrapped2024,
   };
 };

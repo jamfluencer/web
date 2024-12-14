@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import gsap from 'gsap';
 
+const wrapped = useWrapped2024();
 const tvPoweredOn = ref(false);
 const tvPowerTransitioning = ref(false);
 const tvChannel = ref(1);
@@ -54,10 +55,52 @@ async function onRemoteClickPower() {
     await animateTvPowerOn();
   }
 }
+
+const loadingWrapped = ref(true);
+const loader = ref<HTMLDivElement | null>(null);
+const router = useRouter();
+async function getWrapped() {
+  try {
+    wrapped.value = await useJamfluencerApi().getWrapped2024(
+      router.currentRoute.value.params.uuid as string
+    );
+    await gsap.to(loader.value, {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power2.out',
+    });
+    loader.value?.remove();
+  } catch (error) {
+    if (error) {
+      console.error(error);
+      router.replace('/');
+    }
+  } finally {
+    // loadingWrapped.value = false;
+  }
+}
+
+onMounted(getWrapped);
 </script>
 
 <template>
   <div class="bg-black w-full h-screen flex items-center justify-center">
+    <div
+      v-if="loadingWrapped"
+      ref="loader"
+      class="absolute top-0 left-0 w-full h-full bg-black text-white z-10 flex items-center justify-center"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 -960 960 960"
+        fill="currentColor"
+        class="w-[10vw] lg:w-[5vw] animate-spin"
+      >
+        <path
+          d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q17 0 28.5 11.5T520-840q0 17-11.5 28.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160q133 0 226.5-93.5T800-480q0-17 11.5-28.5T840-520q17 0 28.5 11.5T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Z"
+        />
+      </svg>
+    </div>
     <div
       class="relative w-[90vw] lg:w-[50vw]"
       :style="{ aspectRatio: '1.4563' }"
@@ -99,6 +142,13 @@ async function onRemoteClickPower() {
           :class="{ hidden: tvChannel !== 3 }"
         >
           <Wrapped2024Channel3 :active="tvChannel === 3" />
+        </div>
+        <div
+          id="channel-4"
+          class="w-full h-full bg-neutral-100 flex items-center justify-center"
+          :class="{ hidden: tvChannel !== 4 }"
+        >
+          <Wrapped2024Channel4 :active="tvChannel === 4" />
         </div>
       </div>
       <img
