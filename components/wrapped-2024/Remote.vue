@@ -27,11 +27,11 @@ const channelButtons: ReturnType<typeof ChannelButton>[] = [
   ChannelButton(2),
   ChannelButton(3),
   ChannelButton(4),
-  ChannelButton(5, false),
-  ChannelButton(6, false),
-  ChannelButton(7, false),
-  ChannelButton(8, false),
-  ChannelButton(9, false),
+  ChannelButton(5),
+  ChannelButton(6),
+  ChannelButton(7),
+  ChannelButton(8),
+  ChannelButton(9),
 ];
 
 const channelButtonGroups = [

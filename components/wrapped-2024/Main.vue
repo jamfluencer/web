@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import gsap from 'gsap';
-
 const wrapped = useWrapped2024();
 const tvPoweredOn = ref(false);
 const tvPowerTransitioning = ref(false);
@@ -153,10 +151,45 @@ onMounted(getWrapped);
         </div>
         <div
           id="channel-4"
-          class="w-full h-full bg-neutral-100 flex items-center justify-center"
+          class="w-full h-full bg-neutral-800 flex items-center justify-center"
           :class="{ hidden: tvChannel !== 4 }"
         >
           <Wrapped2024Channel4 :active="tvChannel === 4" />
+        </div>
+        <div
+          id="channel-5"
+          class="w-full h-full bg-neutral-800 flex items-center justify-center"
+          :class="{ hidden: tvChannel !== 5 }"
+        >
+          <Wrapped2024Channel5 :active="tvChannel === 5" />
+        </div>
+        <div
+          id="channel-6"
+          class="w-full h-full bg-neutral-800 flex items-center justify-center"
+          :class="{ hidden: tvChannel !== 6 }"
+        >
+          <Wrapped2024Channel6 :active="tvChannel === 6" />
+        </div>
+        <div
+          id="channel-7"
+          class="w-full h-full bg-neutral-800 flex items-center justify-center"
+          :class="{ hidden: tvChannel !== 7 }"
+        >
+          <Wrapped2024Channel7 :active="tvChannel === 7" />
+        </div>
+        <div
+          id="channel-8"
+          class="w-full h-full bg-neutral-800 flex items-center justify-center"
+          :class="{ hidden: tvChannel !== 8 }"
+        >
+          <Wrapped2024Channel8 :active="tvChannel === 8" />
+        </div>
+        <div
+          id="channel-9"
+          class="w-full h-full bg-neutral-800 flex items-center justify-center"
+          :class="{ hidden: tvChannel !== 9 }"
+        >
+          <Wrapped2024Channel9 :active="tvChannel === 9" />
         </div>
       </div>
       <img
