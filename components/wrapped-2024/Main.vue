@@ -60,10 +60,18 @@ const loadingWrapped = ref(true);
 const loader = ref<HTMLDivElement | null>(null);
 const router = useRouter();
 async function getWrapped() {
+  const wrappedId = router.currentRoute.value.params.uuid as string;
+  const cachedWrappedKey = `wrapped2024_${wrappedId}`;
+  const cachedWrapped = localStorage.getItem(cachedWrappedKey);
+
   try {
-    wrapped.value = await useJamfluencerApi().getWrapped2024(
-      router.currentRoute.value.params.uuid as string
-    );
+    if (cachedWrapped) {
+      wrapped.value = JSON.parse(cachedWrapped);
+    } else {
+      wrapped.value = await useJamfluencerApi().getWrapped2024(wrappedId);
+      localStorage.setItem(cachedWrappedKey, JSON.stringify(wrapped.value));
+    }
+
     await gsap.to(loader.value, {
       duration: 0.5,
       opacity: 0,
