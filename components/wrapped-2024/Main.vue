@@ -86,6 +86,14 @@ async function getWrapped() {
   }
 }
 
+const tvContainer = ref<HTMLElement | null>(null);
+const tvSize = useElementSize(tvContainer);
+const scale = computed(() => tvSize.width.value / 480);
+
+watchEffect(() => {
+  console.log(tvSize.width.value);
+});
+
 onMounted(getWrapped);
 </script>
 
@@ -112,6 +120,7 @@ onMounted(getWrapped);
       :style="{ aspectRatio: '1.4563' }"
     >
       <div
+        ref="tvContainer"
         class="absolute top-0 left-0 w-full h-full flex items-center justify-center pl-[6%] pr-[25.8%] pt-[8.2%] pb-[6.8%]"
       >
         <div
@@ -140,7 +149,7 @@ onMounted(getWrapped);
           class="w-full h-full bg-red-700 flex items-center justify-center"
           :class="{ hidden: tvChannel !== 2 }"
         >
-          <Wrapped2024Channel2 :active="tvChannel === 2" />
+          <Wrapped2024Channel2 :active="tvChannel === 2" :scale="scale" />
         </div>
         <div
           id="channel-3"
