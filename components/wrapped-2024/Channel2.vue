@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
   active: boolean;
-  scale: number;
 }>();
 
 const wrapped = useWrapped2024();
@@ -71,30 +70,28 @@ watch(
     :style="{ backgroundImage: `url('/images/wrapped2024/news.jpg')` }"
   >
     <div
-      class="absolute top-[10%] right-[3%] w-[39%] h-[36.5%] flex flex-col justify-center items-center"
+      class="absolute top-[10%] right-[3%] w-[39%] h-[36.5%] flex flex-col justify-center items-center gap-[6%]"
     >
-      <div :style="{ fontSize: `${scale * 1}rem` }">
+      <div class="text-[2vw]/[1] lg:text-[1.125vw]/[1]">
         <strong class="font-extrabold">{{ wrapped.jam.contributors }}</strong>
         contributors added
       </div>
       <div id="ch2_num">
-        <strong class="font-extrabold" :style="{ fontSize: `${scale * 3}rem` }">
+        <strong class="font-extrabold text-[6vw]/[1] lg:text-[4vw]/[1]">
           {{ new Intl.NumberFormat().format(wrapped.jam.tracks) }}
         </strong>
       </div>
-      <div :style="{ fontSize: `${scale * 1}rem` }">tracks this year!</div>
+      <div class="text-[2vw]/[1] lg:text-[1.125vw]/[1]">tracks this year!</div>
     </div>
     <div
       class="h-[7%] w-full absolute bottom-[6%] left-0 bg-neutral-700 text-white flex justify-center items-center"
     >
       <div
         id="ch2_ticker"
-        class="absolute left-full whitespace-nowrap"
-        :style="{ fontSize: `${scale * 1}rem` }"
+        class="absolute left-full whitespace-nowrap text-[2vw]/[1] lg:text-[1.125vw]/[1]"
       >
         <span class="text-red-400 font-extrabold">BREAKING:</span>
-        <!-- {{ wrapped.jam.duration }} of solid hits! -->
-        {{ scale }}
+        {{ wrapped.jam.duration }} of solid hits!
       </div>
     </div>
   </div>

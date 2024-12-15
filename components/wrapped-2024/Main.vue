@@ -86,14 +86,6 @@ async function getWrapped() {
   }
 }
 
-const tvContainer = ref<HTMLElement | null>(null);
-const tvSize = useElementSize(tvContainer);
-const scale = computed(() => tvSize.width.value / 480);
-
-watchEffect(() => {
-  console.log(tvSize.width.value);
-});
-
 onMounted(getWrapped);
 </script>
 
@@ -149,7 +141,7 @@ onMounted(getWrapped);
           class="w-full h-full bg-red-700 flex items-center justify-center"
           :class="{ hidden: tvChannel !== 2 }"
         >
-          <Wrapped2024Channel2 :active="tvChannel === 2" :scale="scale" />
+          <Wrapped2024Channel2 :active="tvChannel === 2" />
         </div>
         <div
           id="channel-3"
