@@ -40,6 +40,7 @@ const resetAnimation = () => {
   [tl, tickerTl].forEach((i) => i.kill());
   gsap.set(els, { clearProps: 'all' });
   tl = gsap.timeline();
+  tickerTl = gsap.timeline();
 };
 
 function onChannelActive() {
@@ -65,7 +66,6 @@ watch(
 <template>
   <div
     v-if="wrapped?.jam"
-    ref="tvContainer"
     class="h-full w-full relative overflow-hidden bg-cover"
     :style="{ backgroundImage: `url('/images/wrapped2024/news.jpg')` }"
   >

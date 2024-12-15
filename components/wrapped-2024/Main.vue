@@ -108,7 +108,7 @@ onMounted(getWrapped);
       </svg>
     </div>
     <div
-      class="relative w-[90vw] lg:w-[50vw]"
+      class="relative w-[90vw] lg:w-[60vw]"
       :style="{ aspectRatio: '1.4563' }"
     >
       <div
