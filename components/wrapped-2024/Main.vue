@@ -187,7 +187,7 @@ onMounted(getWrapped);
         </div>
         <div
           id="channel-9"
-          class="w-full h-full bg-neutral-800 flex items-center justify-center"
+          class="w-full h-full bg-blue-600 flex items-center justify-center"
           :class="{ hidden: tvChannel !== 9 }"
         >
           <Wrapped2024Channel9 :active="tvChannel === 9" />
