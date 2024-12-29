@@ -13,8 +13,8 @@ const stats = ref([
   },
   {
     id: 2,
-    text: 'Average Tracks Per Playlist',
-    value: computed(() => wrapped.value?.playlists.tracks.mean),
+    text: 'Mean Tracks Per Playlist',
+    value: computed(() => Math.round(wrapped.value?.playlists.tracks.mean ?? 0)),
   },
   {
     id: 3,

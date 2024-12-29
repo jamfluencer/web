@@ -81,7 +81,7 @@ watch(
           {{ new Intl.NumberFormat().format(wrapped.jam.tracks) }}
         </strong>
       </div>
-      <div class="text-[2vw]/[1] lg:text-[1.125vw]/[1]">tracks this year!</div>
+      <div class="text-[2vw]/[1] lg:text-[1.125vw]/[1]">tracks in 2024!</div>
     </div>
     <div
       class="h-[7%] w-full absolute bottom-[6%] left-0 bg-neutral-700 text-white flex justify-center items-center"

@@ -8,9 +8,8 @@
         We're so glad to have you as Jam contributor and hope you've enjoyed the
         Jam as much as we have.
       </p>
-      <p class="text-[2vw] lg:text-[1vw] mt-[5%] max-w-[45ch] mx-auto">
-        From all of us at Jamfluencer, we wish you a wonderful rest of 2024 and
-        an even better 2025.
+      <p class="text-[2vw] lg:text-[1vw] mt-[5%] max-w-[45ch] mx-auto text-pretty">
+        From all of us at Jamfluencer, we wish you a wonderful new year.
       </p>
     </div>
   </div>
