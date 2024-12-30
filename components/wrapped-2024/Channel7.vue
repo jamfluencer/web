@@ -9,41 +9,46 @@ const stats = computed(() => [
   },
   {
     key: 'tracks.duration',
-    label: 'Duration',
+    label: 'Your Contribution Duration',
     value: wrapped.value?.you.jam.tracks.duration.percentage + '%'
   },
   {
     key: 'participation',
-    label: 'Jam Participation',
+    label: 'Your Jam Participation',
     value: wrapped.value?.you.jam.participation + '%'
   }
 ]);
+
+const mostAppreciated = computed(() => {
+  const mostAppreciated = wrapped.value?.you.social.tracks['most-appreciated'];
+  return {
+    name: mostAppreciated?.details.name,
+    artists: mostAppreciated?.details.artists.map(a => a.name).join(', '),
+    kudos: mostAppreciated?.kudos
+  };
+});
 </script>
 
 <template>
   <div v-if="wrapped" class="w-full h-full p-[6%]">
-    <div class="w-full h-full flex flex-col">
+    <div class="w-full h-full flex flex-col justify-center">
+      <div class="text-center mb-[3%] text-[4.8vw] lg:text-[3vw] leading-none font-extrabold">YOU</div>
       <template v-for="stat, index in stats" :key="stat.key">
-        <div :style="{ marginTop: index > 0 ? '6%': 0 }">{{ stat.label }}</div>
-        <div class="h-[10%] bg-white/90 flex items-center pl-[1%] text-neutral-800" :style="{ width: stat.value }">
-          {{ stat.value }}
+        <div :style="{ marginTop: index > 0 ? '4%': 0 }">
+          <div class="text-[2vw] lg:text-[1.25vw] leading-none">{{ stat.label }}</div>
+        </div>
+        <div class="mt-[1.5%] h-[10%] bg-white/90 flex items-center pl-[1%] text-neutral-800" :style="{ width: stat.value }">
+          <span class="text-[2vw]/[1] lg:text-[1.25vw]/[1]">{{ stat.value }}</span>
         </div>
       </template>
-      <!-- <div class="h-[10%] w-[80%] bg-white/90 flex items-center pl-[1%] text-neutral-800" :style="{ width: wrapped.you.jam.tracks.duration.percentage + '%' }">
-        {{ wrapped.you.jam.tracks.duration.percentage }}%
+      <div class="mt-[4%]">
+        <div class="text-[2vw] lg:text-[1.25vw] leading-none">Your Most Appreciated Track ❤️</div>
       </div>
-      <div class="h-[10%] w-[85%] bg-white/90 flex items-center pl-[1%] text-neutral-800" :style="{ width: wrapped.you.jam.participation + '%' }">
-        {{ wrapped.you.jam.participation }}%
-      </div> -->
+      <div class="mt-[1.5%]">
+        <div class="text-[2vw]/[1] lg:text-[1.25vw]/[1]">
+          {{ mostAppreciated.name }} by {{ mostAppreciated.artists }} ({{ mostAppreciated.kudos }} kudos)
+        </div>
+      </div>
     </div>
-    <!-- <p>Channel 7: You</p>
-    <p>Your Contribution: {{ wrapped.you.jam.tracks.count.percentage }}%</p>
-    <p>Duration: {{ wrapped.you.jam.tracks.duration.percentage }}%</p>
-    <p>Jam Participation: {{ wrapped.you.jam.participation }}%</p>
-    <p>
-      Most Appreciated Track:
-      {{ wrapped.you.social.tracks['most-appreciated'].details.name }}
-      ({{ wrapped.you.social.tracks['most-appreciated'].kudos }} kudos)
-    </p> -->
   </div>
 </template>

@@ -43,7 +43,7 @@ const channelButtonGroups = [
 
 <template>
   <div
-    class="absolute bottom-0 right-12 bg-neutral-800 rounded-t-2xl w-[180px] h-[195px] overflow-hidden pt-6 px-4 flex flex-col gap-4"
+    class="absolute bottom-0 right-12 bg-neutral-800 rounded-t-2xl w-[180px] h-[216px] overflow-hidden pt-6 px-4 flex flex-col gap-4"
   >
     <div class="flex justify-between items-center">
       <div class="flex-1 flex justify-center">
@@ -66,13 +66,23 @@ const channelButtonGroups = [
         </button>
       </div>
       <div class="flex-1 flex justify-center">
-        <button class="bg-neutral-600 w-6 h-6 rounded-full">
-          <span class="sr-only">???</span>
+        <button
+          class="bg-neutral-600 w-6 h-6 rounded-full disabled:opacity-50 transition-opacity flex items-center justify-center"
+          :disabled="currentChannel === 1 || !props.poweredOn"
+          aria-label="previous"
+          @click="currentChannel -= 1"
+        >
+          <span class="text-lg leading-none">&leftarrow;</span>
         </button>
       </div>
       <div class="flex-1 flex justify-center">
-        <button class="bg-neutral-600 w-6 h-6 rounded-full">
-          <span class="sr-only">???</span>
+        <button
+          class="bg-neutral-600 w-6 h-6 rounded-full disabled:opacity-50 transition-opacity flex items-center justify-center"
+          :disabled="currentChannel === channelButtons.length || !props.poweredOn"
+          aria-label="next"
+          @click="currentChannel += 1"
+        >
+          <span class="text-lg leading-none">&rightarrow;</span>
         </button>
       </div>
     </div>
