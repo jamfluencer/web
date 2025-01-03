@@ -6,7 +6,7 @@ files:
   - source: appspec.yml
     destination: /usr/share/nginx/jamfluencer-web/appspec.yml
   - source: .aws/startup.sh
-    destination: startup.sh
+    destination: /usr/share/nginx/jamfluencer-web/startup.sh
 permissions:
   - object: /usr/share/nginx
     owner: nginx
