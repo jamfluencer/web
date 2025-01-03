@@ -3,8 +3,6 @@ os: linux
 files:
   - source: .output/
     destination: /usr/share/nginx/jamfluencer-web
-  - source: appspec.yml
-    destination: /usr/share/nginx/jamfluencer-web/appspec.yml\
 permissions:
   - object: /usr/share/nginx
     owner: nginx
