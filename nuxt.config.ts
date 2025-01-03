@@ -9,6 +9,10 @@ export default defineNuxtConfig({
       {
         from: '@vueuse/integrations/useFocusTrap',
         imports: ['useFocusTrap'],
+      },
+      {
+        from: 'gsap',
+        imports: ['gsap'],
       }
     ],
   },

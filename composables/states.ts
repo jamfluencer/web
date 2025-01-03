@@ -32,3 +32,5 @@ export function addNotification(message: string, type: 'error' | 'info' = 'info'
     type,
   });
 }
+
+export const useWrapped2024 = () => useState<JamfluencerApi.Wrapped2024.Wrapped | undefined>('wrapped');

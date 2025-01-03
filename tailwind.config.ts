@@ -10,6 +10,7 @@ export default <Partial<Config>>{
     },
     fontFamily: {
       sans: ['Manrope', 'sans-serif'],
+      wrapped: ['Nabla', 'sans-serif'],
     },
     screens: {
       sm: '640px',
