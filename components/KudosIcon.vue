@@ -1,4 +1,12 @@
 <script setup lang="ts">
+const props = withDefaults(defineProps<{
+  heartHeight?: string[];
+  heartSize?: string;
+}>(), {
+  heartHeight: () => ['8rem', '10rem'],
+  heartSize: '24px',
+});
+
 const emit = defineEmits<{
   (e: 'animationEnded'): void;
 }>();
@@ -13,8 +21,8 @@ async function animateHeart() {
   const animation = heart.value.animate(
     [
       { transform: 'translateY(0)', opacity: 1 },
-      { transform: 'translateY(-8rem)', opacity: 1 },
-      { transform: 'translateY(-10rem)', opacity: 0 },
+      { transform: `translateY(-${props.heartHeight[0]})`, opacity: 1 },
+      { transform: `translateY(-${props.heartHeight[1]})`, opacity: 0 },
     ],
     {
       duration: 1000,
@@ -46,9 +54,9 @@ onMounted(() => {
       left: `${leftPosition}%`,
     }"
     xmlns="http://www.w3.org/2000/svg"
-    height="24px"
+    :height="heartSize"
     viewBox="0 -960 960 960"
-    width="24px"
+    :width="heartSize"
     fill="red"
   >
     <path
