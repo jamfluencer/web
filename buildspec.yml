@@ -6,9 +6,9 @@ phases:
       - npm install
   build:
     commands:
-      - npx nuxi generate
+      - npx nuxi build
 artifacts:
   files:
-    - '.output/public/**/*'
+    - '.output/**/*'
     - 'appspec.yml'
   name: jam-web-$(date +%Y-%m-%d)
