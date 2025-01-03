@@ -4,9 +4,7 @@ files:
   - source: .output/
     destination: /usr/share/nginx/jamfluencer-web
   - source: appspec.yml
-    destination: /usr/share/nginx/jamfluencer-web/appspec.yml
-  - source: .aws/startup.sh
-    destination: /usr/share/nginx/jamfluencer-web/startup.sh
+    destination: /usr/share/nginx/jamfluencer-web/appspec.yml\
 permissions:
   - object: /usr/share/nginx
     owner: nginx
@@ -14,4 +12,4 @@ permissions:
     mode: 775
 hooks:
   AfterInstall:
-    - location: startup.sh
+    - location: .aws/startup.sh
