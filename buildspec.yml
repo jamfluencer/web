@@ -11,4 +11,5 @@ artifacts:
   files:
     - '.output/**/*'
     - 'appspec.yml'
+    - '.aws/startup.sh'
   name: jam-web-$(date +%Y-%m-%d)

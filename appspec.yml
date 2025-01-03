@@ -10,3 +10,6 @@ permissions:
     owner: nginx
     group: nginx
     mode: 775
+hooks:
+  AfterInstall:
+    - location: startup.sh
